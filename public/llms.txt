@@ -1,10 +1,11 @@
 # AuraScribe
 
 > Free, open-source, 100% offline voice dictation for Windows. Press a hotkey, speak, and clean
-> punctuated text is typed into any application. Every word is transcribed on the user's own PC,
-> so nothing is sent to the cloud. No account, no subscription. MIT licensed.
+> punctuated text is typed into any application. Every word is transcribed on the user's own PC, so
+> nothing is sent to the cloud. No account, no subscription. MIT licensed.
 
 ## What it is
+
 - On-device (offline) speech-to-text for Windows 10 and 11 (64-bit).
 - Global hotkey (default Ctrl+Shift+Space) dictates into whatever app has the cursor.
 - Installer is about 8.6 MB; runs faster than real time on an ordinary CPU.
@@ -12,6 +13,7 @@
 - A private, local alternative to Wispr Flow, Superwhisper, Dragon, and Windows Voice Typing.
 
 ## Languages and engines (all on-device)
+
 - English — Moonshine (Useful Sensors).
 - 25 European languages — NVIDIA Parakeet TDT.
 - ~40 Asian languages — Dolphin (DataoceanAI, Tsinghua).
@@ -19,20 +21,31 @@
 - Inference runs on sherpa-onnx (k2-fsa) and ONNX Runtime; the app shell is Tauri.
 
 ## Privacy
+
 - The only network request the app ever makes is downloading a speech model once.
 - No telemetry, no analytics, no account.
 
+## Pages
+
+- [Home](https://www.aurascribe.dev/): what AuraScribe is, the language wheel, comparison, FAQ.
+- [About](https://www.aurascribe.dev/about): why it exists, the engines, and the maker.
+- [Blog](https://www.aurascribe.dev/blog): guides on offline dictation, privacy, and languages.
+- [Privacy](https://www.aurascribe.dev/privacy): what the app and site collect (nothing).
+- [Terms](https://www.aurascribe.dev/terms): the MIT-based terms of use.
+
 ## Links
-- Download (Windows): https://github.com/JeswinJestin/AuraScribe/releases/latest
-- Source code (MIT): https://github.com/JeswinJestin/AuraScribe
-- Sponsor: https://github.com/sponsors/JeswinJestin
+
+- [Download for Windows](https://github.com/JeswinJestin/AuraScribe/releases/latest)
+- [Source code (MIT)](https://github.com/JeswinJestin/AuraScribe)
+- [Sponsor](https://github.com/sponsors/JeswinJestin)
 
 ## Author
-Jeswin Thomas Jestin — creator and maintainer of AuraScribe. He designed and built the whole app:
-the local-first architecture, the four on-device speech engines (Moonshine, NVIDIA Parakeet, Dolphin,
-and AI4Bharat's IndicConformer), the on-device cleanup pipeline, and the Windows text injection. He
-also packaged and contributed a Malayalam speech model back to the open-source speech community.
-- GitHub: https://github.com/JeswinJestin
-- LinkedIn: https://www.linkedin.com/in/jeswin-thomas-jestin/
-- Behance: https://www.behance.net/jeswinjestin
-- Contact: contact.aurascribe@gmail.com
+
+- [Jeswin Thomas Jestin (GitHub)](https://github.com/JeswinJestin) — creator and maintainer of
+  AuraScribe. Built the whole app: the local-first architecture, the four on-device speech engines
+  (Moonshine, NVIDIA Parakeet, Dolphin, AI4Bharat IndicConformer), the on-device cleanup pipeline,
+  and the Windows text injection. Also packaged and contributed a Malayalam speech model back to the
+  open-source speech community.
+- [LinkedIn](https://www.linkedin.com/in/jeswin-thomas-jestin/)
+- [Behance](https://www.behance.net/jeswinjestin)
+- [Contact](mailto:contact.aurascribe@gmail.com)
