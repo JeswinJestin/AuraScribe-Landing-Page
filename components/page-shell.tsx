@@ -44,24 +44,26 @@ export function PageShell({
             </span>
             <span className="font-display text-[19px] font-semibold tracking-tight">AuraScribe</span>
           </a>
-          <div className="flex items-center gap-2">
-            <a
-              href="/"
-              className="hidden items-center gap-2 text-[14px] text-muted transition-colors hover:text-ink sm:inline-flex"
-            >
-              <ArrowLeft size={15} weight="bold" />
-              Home
-            </a>
-            <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary !px-4 !py-2 !text-[14px]">
-              <DownloadSimple size={16} weight="bold" />
-              Download
-            </a>
-          </div>
+          <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary !px-4 !py-2 !text-[14px]">
+            <DownloadSimple size={16} weight="bold" />
+            Download
+          </a>
         </div>
       </header>
 
       <main className="container-x py-16 md:py-24">
         <div className="mx-auto max-w-[72ch]">
+          {/* Back-to-home sits right above the page title (owner's placement). Blog posts already
+              carry a Home / Blog breadcrumb, so it is only shown when there is no breadcrumb. */}
+          {!breadcrumb ? (
+            <a
+              href="/"
+              className="mb-6 inline-flex items-center gap-2 text-[14px] font-medium text-muted transition-colors hover:text-accent"
+            >
+              <ArrowLeft size={15} weight="bold" />
+              Back to home
+            </a>
+          ) : null}
           {breadcrumb ? breadcrumb : <p className="eyebrow">{eyebrow}</p>}
           <h1 className="display mt-4 text-[44px] leading-[1.02] sm:text-[60px] md:text-[72px]">{title}</h1>
           {intro ? <p className="mt-6 max-w-[60ch] text-[19px] leading-relaxed text-muted">{intro}</p> : null}
