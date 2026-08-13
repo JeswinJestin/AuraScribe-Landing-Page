@@ -4,7 +4,16 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-13 (wheel, headers, a11y, blog, git, branding + Vercel-aware URL) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-13 (wheel rebuilt timer-based, Home moved above title, LinkedIn+Behance) · **Owner:** Jeswin Thomas Jestin
+
+**This session's smaller changes:** (1) Content pages: the "Home" link moved OUT of the top nav into a
+"Back to home" link right above each page title (`page-shell.tsx`); the top bar is now just the logo
+(links home) + Download. Blog posts keep their Home/Blog breadcrumb instead, so the back-link only
+renders when there is no breadcrumb. (2) Socials: owner's LinkedIn
+(`https://www.linkedin.com/in/jeswin-thomas-jestin/`) and Behance
+(`https://www.behance.net/jeswinjestin`) added to `site.author`, so they render on the About maker
+buttons + footer icons, and are in the `Person` `sameAs` and `public/llms.txt`. Owner does NOT want a
+larger front-end bio — keep the existing About maker section as-is, don't expand it.
 
 ---
 
@@ -14,24 +23,26 @@
 `site.contactEmail`. It feeds the contact form mailto fallback, the Contact section, and both legal
 pages.
 
-**Language-wheel scroll bug FIXED (`language-wheel.tsx`).** The owner's screen recording showed the
-pinned scene drifting up/down and the coverage band bleeding in mid-wheel, plus the panel trailing
-the scroll. Root causes and fixes:
-- **Vertical drift = the card changed height per language** (pill vs paragraph note, longer sample),
-  so the `min-h-[100dvh] justify-center` section re-centred its block every time the language
-  changed. Fix: the detail card is now a FIXED height (`min-h-[360px] sm:min-h-[400px] flex-col`),
-  so the scene is rock-steady during the pin. **Do not remove that fixed height.**
-- **Panel lag = double smoothing.** Was `scrub: 0.6` on top of Lenis's own smoothing. Now
-  `scrub: true` maps the (already Lenis-smoothed) scroll directly to the wheel; the wheel's own 45ms
-  ease is the only extra smoothing. Removed `anticipatePin` (it jumps the scroll and fights Lenis).
-  Added `invalidateOnRefresh: true` so the pin distance can't go stale.
-- **Mobile:** on `(pointer: coarse)` or width < 768 the wheel does NOT pin (pinning a 100dvh section
-  fights native touch scroll and jumps when the mobile toolbar shows/hides); it just steps as the
-  section scrolls past. Verified at 375px: no pin-spacer, no horizontal scroll.
-- **Verified:** desktop prod build creates the pin (`.pin-spacer` 4423px, `#reach` inside it), card
-  locked at 400px, console clean under the strict prod CSP. **NOT verifiable here:** the live motion
-  *feel* (stepping cadence during a real drag/scroll) — this sandbox browser can't drive Lenis
-  (no compositing, synthetic wheel events ignored). Owner should confirm the feel in a real browser.
+**Language wheel is NO LONGER scroll-driven (`language-wheel.tsx`) — this replaced the pin entirely.**
+After many iterations, the GSAP pin + scrub + Lenis approach never felt smooth for the owner and the
+pin (which locked page scroll for ~5 screens) was the "obstruction" they reported. It was REMOVED and
+replaced with a self-contained showcase:
+- **Auto-cycle on a timer.** `setInterval` advances the language every `STEP_MS` (2600ms) while the
+  section is on screen (an `IntersectionObserver` gates it). The detail card updates from the wheel's
+  `onChange`. No pin, no scrub, no ScrollTrigger, no Lenis coupling — so the page scrolls normally and
+  this section can never hijack or obstruct scroll. GSAP import is gone from this file.
+- **Interactive.** Hovering/focusing the wheel pauses the cycle; clicking a language jumps to it
+  (new `selectable` prop on `OptionWheel` allows a click to select even in `controlled` mode, which
+  still disables wheel/drag so page scroll is never trapped).
+- **Card is still FIXED height** (`min-h-[360px] sm:min-h-[400px]`) so autoplay never reflows the
+  layout. Reduced motion → static on one language, no autoplay.
+- **Verified (dev, with an rAF shim to beat the sandbox's frame throttling):** no `.pin-spacer`
+  exists (pin gone; page height dropped 14201 → 11934px), and clicking a language switched the card
+  (English → हिन्दी, sentence and all). Autoplay uses the same `setTarget` path on a timer, so it
+  cycles in a real browser. If the owner ever wants it slower/faster, change `STEP_MS`.
+- **Knock-on:** removing the pin means the wheel no longer adds scroll distance, so the old
+  ThemeScroll/pin `refreshPriority` dance (§4) is moot — the cream chamber just measures its natural
+  height now. Nothing else depends on the pin.
 
 **Security headers added (`next.config.mjs`).** A CSP + HSTS + `X-Content-Type-Options: nosniff` +
 `X-Frame-Options: DENY` + `Referrer-Policy` + `Permissions-Policy` (locks camera/mic/geo/topics) +
@@ -146,14 +157,16 @@ from the homepage `footer.tsx` and from each shell, and are in `sitemap.ts`.
   `var(--theme-transition, 1.1s)` (set to 0s under reduced motion). Every component reads these tokens,
   so they all re-tint together. **Grouping matters:** hero=dark; one cream wrapper holds turn+wheel;
   invitation is its own `data-chamber="dark" data-start="top 15%"`; the rest is one dark wrapper.
-- **Refresh order:** the wheel pins and adds scroll distance. ThemeScroll uses `refreshPriority: -1`
-  and the pin uses `refreshPriority: 1` (+ a post-mount `ScrollTrigger.refresh()`) so chamber heights
-  are measured AFTER pins exist. **Any new pin inside a chamber needs this or the colour flips early.**
-- **Language wheel (`language-wheel.tsx` + `option-wheel.tsx`):** pinned, `end: +=(n-1)*100%` (~1
-  viewport per language), `scrub: 0.6`, `onUpdate` quantises to a whole index. **No ScrollTrigger
-  `snap`** (it called `window.scrollTo` and fought Lenis → the multi-jumps). `items` is a module
-  const and `onChange` is `useCallback`, and OptionWheel is `memo`'d, so panel updates never
-  re-init the wheel. Selection is driven from the VISUAL centre inside the rAF loop.
+- **Refresh order:** there are NO pins in the story any more (the wheel pin was removed — see §0), so
+  the old ThemeScroll/pin `refreshPriority` coordination no longer matters. ThemeScroll still uses
+  `refreshPriority: -1`; if you ever ADD a pin inside a chamber, give it `refreshPriority: 1` (+ a
+  post-mount `ScrollTrigger.refresh()`) so chamber heights measure after the pin, or the colour flips
+  early.
+- **Language wheel (`language-wheel.tsx` + `option-wheel.tsx`):** NOT scroll-driven (see §0). It
+  auto-cycles on a `setInterval` (2600ms) gated by an `IntersectionObserver`, pauses on hover/focus,
+  and supports click-to-jump via `OptionWheel`'s `selectable` prop. `items` is a module const,
+  `onChange` is a `useCallback`, and OptionWheel is `memo`'d, so card updates never re-init the wheel.
+  OptionWheel is still the same rAF ease loop; only the DRIVER changed (timer/click, not scroll).
 - **Rings (`ChamberRings` in `story.tsx`):** a sticky, zero-height layer that is a DIRECT child of the
   cream chamber, so one ring system spans turn→wheel with nothing clipped by a section edge (that
   clip was the "divider" bug). Sized `min(74vh,86vw)` so the whole circle shows before it drifts aside.
