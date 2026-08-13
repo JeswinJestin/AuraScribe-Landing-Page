@@ -28,7 +28,8 @@ export const site = {
   author: {
     name: 'Jeswin Thomas Jestin',
     githubProfile: 'https://github.com/JeswinJestin',
-    linkedin: '', // TODO(owner): paste your LinkedIn profile URL, e.g. https://www.linkedin.com/in/...
+    linkedin: 'https://www.linkedin.com/in/jeswin-thomas-jestin/',
+    behance: 'https://www.behance.net/jeswinjestin',
   },
   // Visible contact address (SEO/trust). Dedicated inbox for the site's contact form + support.
   contactEmail: 'contact.aurascribe@gmail.com',

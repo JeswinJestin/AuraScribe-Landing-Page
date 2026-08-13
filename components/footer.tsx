@@ -1,4 +1,4 @@
-import { DownloadSimple, GithubLogo, Heart, Coffee, LinkedinLogo } from '@phosphor-icons/react/dist/ssr'
+import { DownloadSimple, GithubLogo, Heart, Coffee, LinkedinLogo, BehanceLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
 import { Reveal } from './primitives'
 
@@ -126,6 +126,17 @@ export function Footer() {
                   className="hover:text-accent"
                 >
                   <LinkedinLogo size={16} weight="fill" />
+                </a>
+              ) : null}
+              {site.author.behance ? (
+                <a
+                  href={site.author.behance}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${site.author.name} on Behance`}
+                  className="hover:text-accent"
+                >
+                  <BehanceLogo size={16} weight="fill" />
                 </a>
               ) : null}
             </span>

@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 // sameAs lists the maker's canonical profiles so search engines can resolve "Jeswin Thomas Jestin"
 // to one entity. Only real, owned profiles belong here; the empty ones are dropped.
-const authorSameAs = [site.author.githubProfile, site.author.linkedin].filter(Boolean)
+const authorSameAs = [site.author.githubProfile, site.author.linkedin, site.author.behance].filter(Boolean)
 
 const jsonLd = {
   '@context': 'https://schema.org',

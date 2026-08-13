@@ -28,4 +28,11 @@
 - Sponsor: https://github.com/sponsors/JeswinJestin
 
 ## Author
-Jeswin Thomas Jestin.
+Jeswin Thomas Jestin — creator and maintainer of AuraScribe. He designed and built the whole app:
+the local-first architecture, the four on-device speech engines (Moonshine, NVIDIA Parakeet, Dolphin,
+and AI4Bharat's IndicConformer), the on-device cleanup pipeline, and the Windows text injection. He
+also packaged and contributed a Malayalam speech model back to the open-source speech community.
+- GitHub: https://github.com/JeswinJestin
+- LinkedIn: https://www.linkedin.com/in/jeswin-thomas-jestin/
+- Behance: https://www.behance.net/jeswinjestin
+- Contact: contact.aurascribe@gmail.com

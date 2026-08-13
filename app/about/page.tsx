@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react/dist/ssr'
+import { GithubLogo, LinkedinLogo, BehanceLogo, EnvelopeSimple } from '@phosphor-icons/react/dist/ssr'
 import { PageShell } from '@/components/page-shell'
 import { engines, site } from '@/lib/site'
 
@@ -149,6 +149,17 @@ export default function AboutPage() {
           >
             <LinkedinLogo size={16} weight="fill" />
             LinkedIn
+          </a>
+        ) : null}
+        {site.author.behance ? (
+          <a
+            href={site.author.behance}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-ghost !py-2 !text-[14px]"
+          >
+            <BehanceLogo size={16} weight="fill" />
+            Behance
           </a>
         ) : null}
         <a href={`mailto:${site.contactEmail}`} className="btn btn-ghost !py-2 !text-[14px]">
