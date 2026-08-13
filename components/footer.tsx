@@ -1,4 +1,4 @@
-import { DownloadSimple, GithubLogo, Heart, Coffee } from '@phosphor-icons/react/dist/ssr'
+import { DownloadSimple, GithubLogo, Heart, Coffee, LinkedinLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
 import { Reveal } from './primitives'
 
@@ -106,7 +106,29 @@ export function Footer() {
             <a href="/about" className="hover:text-accent">About</a>
             <a href="/privacy" className="hover:text-accent">Privacy</a>
             <a href="/terms" className="hover:text-accent">Terms</a>
-            <span className="font-mono">Built by Jeswin Thomas Jestin</span>
+            <span className="flex items-center gap-3">
+              <a href="/about" className="font-mono hover:text-accent">Built by {site.author.name}</a>
+              <a
+                href={site.author.githubProfile}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${site.author.name} on GitHub`}
+                className="hover:text-accent"
+              >
+                <GithubLogo size={16} weight="fill" />
+              </a>
+              {site.author.linkedin ? (
+                <a
+                  href={site.author.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${site.author.name} on LinkedIn`}
+                  className="hover:text-accent"
+                >
+                  <LinkedinLogo size={16} weight="fill" />
+                </a>
+              ) : null}
+            </span>
           </nav>
         </div>
       </div>

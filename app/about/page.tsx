@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react/dist/ssr'
 import { PageShell } from '@/components/page-shell'
 import { engines, site } from '@/lib/site'
 
@@ -113,11 +114,52 @@ export default function AboutPage() {
         price of software that keeps your voice on your own machine, they are the right ones.
       </p>
 
-      <h2>Who builds it</h2>
+      <h2>Jeswin Thomas Jestin, the maker</h2>
       <p>
-        AuraScribe is built and maintained by Jeswin Thomas Jestin. It is a real, shipping app rather
-        than a demo, and it improves through the people who use it and report what breaks. If you
-        want to help, the most useful things are simple: use it daily,{' '}
+        AuraScribe is designed, built, and maintained by <strong>Jeswin Thomas Jestin</strong>. The
+        work spans the whole stack: the local-first architecture, the four on-device speech engines
+        (Moonshine, NVIDIA Parakeet, Dolphin, and AI4Bharat&rsquo;s IndicConformer), the on-device
+        cleanup pipeline that turns raw speech into clean text, the personal dictionary and snippets,
+        and the Windows text injection that types into any application.
+      </p>
+      <p>
+        Reaching genuinely good offline Malayalam was the hardest part, and it produced something
+        worth sharing: a packaged Malayalam speech model contributed back to the open-source speech
+        community, so the next person building offline Indic dictation does not have to start from
+        nothing. AuraScribe is built in the open, shipped as real, versioned releases rather than
+        demos, and improved through the people who use it and report what breaks.
+      </p>
+
+      <div className="not-prose mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href={site.author.githubProfile}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-ghost !py-2 !text-[14px]"
+        >
+          <GithubLogo size={16} weight="fill" />
+          GitHub
+        </a>
+        {site.author.linkedin ? (
+          <a
+            href={site.author.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn-ghost !py-2 !text-[14px]"
+          >
+            <LinkedinLogo size={16} weight="fill" />
+            LinkedIn
+          </a>
+        ) : null}
+        <a href={`mailto:${site.contactEmail}`} className="btn btn-ghost !py-2 !text-[14px]">
+          <EnvelopeSimple size={16} weight="fill" />
+          Email
+        </a>
+      </div>
+
+      <h2>How to help</h2>
+      <p>
+        If you want to support the project, the most useful things are simple: use it daily,{' '}
         <a href={`${site.github}/issues`} target="_blank" rel="noreferrer">
           file an issue
         </a>{' '}
