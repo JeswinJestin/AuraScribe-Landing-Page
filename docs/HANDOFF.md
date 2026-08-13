@@ -4,7 +4,7 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-13 (wheel fix, security headers, a11y/contrast, blog, git init) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-13 (wheel, headers, a11y, blog, git, branding + Vercel-aware URL) · **Owner:** Jeswin Thomas Jestin
 
 ---
 
@@ -199,7 +199,20 @@ Both are cosmetic/edge and were intentionally deferred.
 ## 8. PENDING TASKS — start here in the new chat (priority order)
 
 **A. Owner-provided content / accounts (blocking real launch):**
-1. **Real domain** → set `site.url` in `lib/site.ts` (sitemap, robots, canonical, OG all derive from it).
+1. **Domain — now auto-handled for the Vercel default link.** `site.url` (`lib/site.ts`) resolves
+   dynamically: `NEXT_PUBLIC_SITE_URL` override → else Vercel's `VERCEL_PROJECT_PRODUCTION_URL`
+   (the stable `*.vercel.app` domain, set automatically) → else a dev fallback. Verified: with the
+   Vercel env var set, canonical + sitemap + OG all use the `.vercel.app` URL. **No domain purchase
+   needed** to launch correctly. If a real domain is bought later, set `NEXT_PUBLIC_SITE_URL` to it in
+   Vercel env and redeploy. **`sitemap.xml` submission to Search Console uses whatever that resolves
+   to.** (Owner decided: no `.com` purchase for now, ship on the Vercel link.)
+   - **AUTHOR/BRANDING (done this session):** `site.author` holds the maker identity. A schema.org
+     `Person` (in `layout.tsx`, `@id #jeswin`, `sameAs` the profiles) is linked as the app's author, so
+     searches for "Jeswin Thomas Jestin" can resolve to a real entity. The About page has a
+     name-forward maker bio (verifiable facts only) + GitHub/Email buttons; the footer byline links to
+     About with GitHub/LinkedIn icons. **LinkedIn is intentionally empty (`site.author.linkedin = ''`)
+     until the owner provides the URL** — every LinkedIn link is conditionally rendered, so nothing
+     false ships. Owner to also verify/expand the bio with any career details they want included.
 2. **Google Form** for the contact form → create it, paste the `/formResponse` URL + the three
    `entry.xxxx` field IDs into `site.contactForm` in `lib/site.ts` (else it falls back to mailto).
 3. **Real product screenshot** of the running Windows app → drop in `public/`, place in the hero or a
@@ -291,5 +304,6 @@ fix, `dangerouslySetInnerHTML` reviewed (only the static JSON-LD object — safe
 
 **Explicitly N/A for this site (do not spend time on):** SQL/NoSQL injection, CSRF, file-upload
 security, auth/session/token handling, rate limiting, payment/webhook security, cookie consent (no
-cookies/trackers), server logging/monitoring, production-vs-dev DB separation. These belong to the
-**main AuraScribe app**, which the owner will hand over as a separate document for its own review.
+cookies/trackers), server logging/monitoring, production-vs-dev DB separation. Those categories are
+about server/app backends this static site does not have. (There is NO separate main-app security
+review in scope — the owner confirmed they are not commissioning one here.)
