@@ -44,9 +44,22 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
+// sameAs lists the maker's canonical profiles so search engines can resolve "Jeswin Thomas Jestin"
+// to one entity. Only real, owned profiles belong here; the empty ones are dropped.
+const authorSameAs = [site.author.githubProfile, site.author.linkedin].filter(Boolean)
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#jeswin`,
+      name: site.author.name,
+      url: site.author.linkedin || site.author.githubProfile,
+      description:
+        'Creator and maintainer of AuraScribe, a free, open-source, offline voice dictation app for Windows.',
+      sameAs: authorSameAs,
+    },
     {
       '@type': 'SoftwareApplication',
       '@id': `${site.url}/#app`,
@@ -69,7 +82,7 @@ const jsonLd = {
         'Automatic punctuation, casing and filler-word cleanup',
         'No account, no subscription, no cloud',
       ],
-      author: { '@type': 'Person', name: 'Jeswin Thomas Jestin' },
+      author: { '@id': `${site.url}/#jeswin` },
     },
     {
       '@type': 'WebSite',

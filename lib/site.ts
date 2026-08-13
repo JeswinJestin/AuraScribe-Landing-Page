@@ -1,13 +1,35 @@
+/*
+  Canonical site origin. Resolved in this order so the deployed canonicals / sitemap / OG tags are
+  always correct WITHOUT hardcoding a domain we do not own:
+    1. NEXT_PUBLIC_SITE_URL         — explicit override (set this if/when a real domain is bought).
+    2. VERCEL_PROJECT_PRODUCTION_URL — Vercel sets this automatically to the stable production
+                                       *.vercel.app URL, so the default Vercel link Just Works.
+    3. fallback                      — only hit in local dev, where canonicals don't matter.
+  site.url is only read in server code (metadata, sitemap, robots, JSON-LD), so the non-public
+  Vercel env var is available at build/runtime.
+*/
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '') ||
+  'https://aurascribe.app'
+
 export const site = {
   name: 'AuraScribe',
   tagline: 'Free, offline voice dictation for Windows.',
   description:
     'AuraScribe is a free, open-source, 100% offline voice dictation app for Windows. Press a hotkey, speak, and clean text appears in any app. A private, local alternative to Wispr Flow, Superwhisper, and Dragon. No cloud, no account, no subscription.',
-  url: 'https://aurascribe.app',
+  url: siteUrl,
   github: 'https://github.com/JeswinJestin/AuraScribe',
   releases: 'https://github.com/JeswinJestin/AuraScribe/releases/latest',
   sponsor: 'https://github.com/sponsors/JeswinJestin',
   coffee: 'https://buymeacoffee.com/jes.weee',
+  // The maker, for the About page + Person structured data (helps searches for the name resolve to
+  // a real entity). Only verifiable facts belong here; `linkedin` is filled in by the owner.
+  author: {
+    name: 'Jeswin Thomas Jestin',
+    githubProfile: 'https://github.com/JeswinJestin',
+    linkedin: '', // TODO(owner): paste your LinkedIn profile URL, e.g. https://www.linkedin.com/in/...
+  },
   // Visible contact address (SEO/trust). Dedicated inbox for the site's contact form + support.
   contactEmail: 'contact.aurascribe@gmail.com',
   // Optional Google Forms wiring. Leave `formAction` empty to use the mailto fallback (works with
