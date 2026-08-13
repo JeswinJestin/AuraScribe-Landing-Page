@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description: site.description,
   },
   robots: { index: true, follow: true },
+  // Bing Webmaster ownership. Also verifiable via /BingSiteAuth.xml (public/). Google Search Console
+  // is verified separately via a DNS TXT record (no meta tag needed) — see docs/SEO.md.
+  verification: { other: { 'msvalidate.01': '3BB68E671EFDBCEC0E777C1BF54853D7' } },
 }
 
 // sameAs lists the maker's canonical profiles so search engines can resolve "Jeswin Thomas Jestin"
