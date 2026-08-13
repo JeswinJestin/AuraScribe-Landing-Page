@@ -65,8 +65,10 @@ export function Contact() {
     }
   }
 
+  // border-faint (not the hairline border-line) so the field boundary is actually perceivable
+  // (WCAG 1.4.11 non-text contrast); focus still promotes to the accent ring.
   const inputCls =
-    'mt-2 w-full rounded-[12px] border-2 border-line bg-transparent px-4 py-3 text-[16px] ' +
+    'mt-2 w-full rounded-[12px] border-2 border-faint bg-transparent px-4 py-3 text-[16px] ' +
     'text-ink placeholder:text-faint focus:border-accent focus:outline-none'
 
   return (

@@ -22,6 +22,9 @@ gsap.registerPlugin(ScrollTrigger)
 
 type Theme = Record<string, string>
 
+// NOTE: every token that any chamber overrides must appear in BOTH objects, because apply() only
+// writes the keys it is given — a key present in CREAM but missing from DARK would keep CREAM's
+// value after a cream->dark transition. --record is here for exactly that reason.
 const DARK: Theme = {
   '--bg': '48 22% 6%',
   '--surface': '45 14% 10%',
@@ -30,15 +33,19 @@ const DARK: Theme = {
   '--faint': '45 8% 50%',
   '--line': '45 12% 20%',
   '--accent': '227 100% 72%',
+  '--record': '5 74% 62%',
 }
 const CREAM: Theme = {
   '--bg': '52 44% 95%',
   '--surface': '52 50% 99%',
   '--ink': '45 12% 11%',
   '--muted': '45 7% 36%',
-  '--faint': '45 7% 52%',
+  // faint was 45 7% 52% -> only 3.24:1 on cream (fails AA for the small mono labels). Darkened.
+  '--faint': '45 8% 42%',
   '--line': '45 20% 84%',
   '--accent': '227 96% 58%',
+  // record was left at the dark-chamber red (3.11:1 on cream, fails). Darker red for the hero pill.
+  '--record': '5 72% 45%',
 }
 
 function apply(theme: Theme) {

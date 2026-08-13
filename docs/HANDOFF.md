@@ -4,7 +4,7 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-12 (wheel scroll fix + security headers + contact email) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-13 (wheel fix, security headers, a11y/contrast, blog, git init) · **Owner:** Jeswin Thomas Jestin
 
 ---
 
@@ -44,10 +44,34 @@ on Vercel (this is a normal SSR/Static Next build, NOT `output: export`).
 **SEO plumbing re-verified in prod:** robots.txt, sitemap.xml (4 routes), `/about` canonical+title,
 404 on a bogus route, 200 on home — all correct. `.claude/launch.json` added (dev preview config).
 
+**Accessibility / contrast fixes (WCAG AA), all verified live in a prod build:**
+- Primary button text (white on the light dark-chamber indigo) was **2.97:1 (fail)**. Added a
+  dedicated `--accent-btn: 227 88% 56%` (constant across chambers) for the FILLED button only, so the
+  locked `--accent` token is untouched for text/borders. Button text is now **5.6:1**.
+- Cream-chamber `--faint` was **3.24:1** on the small mono labels (fail) → darkened to `45 8% 42%`
+  (**4.62:1**). Cream `--record` (error text / hero pill) was stuck at the dark red **3.11:1** (fail)
+  → cream now sets its own `5 72% 45%` (**5.12:1**). NOTE: `--record` is now in BOTH theme objects in
+  `theme-scroll.tsx` — it has to be, or a cream→dark move leaves it stale (see the comment there).
+- Contact form inputs use `border-faint` (not the hairline `border-line`) so the field boundary is
+  perceivable (WCAG 1.4.11). Focus still promotes to the accent ring.
+- Mobile (375) and tablet (768): no horizontal scroll, verified.
+
+**Blog shipped** (`/blog` + 5 SEO posts) — see §8 task 7 for the structure and how to add a post.
+
+**Git:** the folder is now a LOCAL git repo (`master`), remote `origin` set to the owner's
+`AuraScribe-Landing-Page` repo, `.gitattributes` added (LF normalise), dead `hero.tsx` /
+`sequence-canvas.tsx` removed. **Committed locally, NOT pushed** (owner's choice). To publish: confirm
+with owner, then `git push -u origin master`.
+
 **Still a static marketing site — most of the big security/perf/SEO checklists the owner pasted are
 N/A** (no auth, no DB, no user-generated HTML, no file upload, no payments, no cookies, no
 localStorage, no third-party scripts). See §10 for the applicability triage and what genuinely
 remains.
+
+**Pre-existing note (not fixed, owner's call):** `layout.tsx` `twitter:title` / `openGraph.title` use
+an em-dash ("AuraScribe — offline voice dictation..."). It's the established brand title in metadata
+(not body copy); left as-is to avoid changing the global title tag. Swap to a colon if the em-dash
+rule should extend to metadata.
 
 ---
 
@@ -192,9 +216,15 @@ Both are cosmetic/edge and were intentionally deferred.
    contact-form note. **Two owner follow-ups:** (a) the Terms has NO governing-law clause on purpose
    (a code comment marks where to add your jurisdiction if you want one); (b) both dates read
    "12 August 2026" — bump if you materially change them.
-7. **5 blog posts** (SEO long-tail: "offline dictation on Windows", "Wispr Flow free alternative",
-   "on-device Malayalam speech to text", etc.). Needs a simple `/blog` route + MDX or content files.
-   (The `.prose` typography + `page-shell.tsx` from this round are ready to reuse for posts.)
+7. ✅ **DONE — Blog** (`/blog` index + 5 posts). Content model in `lib/blog.ts` (single source of
+   truth for meta: slug/title/description/date/readingMinutes/tags). Post bodies are real crawlable
+   JSX in `app/blog/<slug>/page.tsx`, wrapped by `components/blog-post.tsx` (breadcrumb + date/reading
+   meta + BlogPosting & BreadcrumbList JSON-LD, `<`-escaped). Index at `app/blog/page.tsx`. No MDX/new
+   deps. Posts: offline-dictation-windows, free-wispr-flow-alternative, malayalam-speech-to-text-
+   offline, dictate-into-any-app-hotkey, local-vs-cloud-dictation-privacy. All in the sitemap; linked
+   from nav, footer, and the shell footer; cross-linked to each other. Bodies are em-dash-free.
+   **To add a post:** append to `posts` in `lib/blog.ts`, create `app/blog/<slug>/page.tsx` (copy an
+   existing one), done (sitemap + index pick it up automatically).
 
 **C. Off-page SEO (owner actions, cannot be coded):**
 8. Backlinks: Product Hunt launch, alternativeto.net (as a Wispr Flow/Dragon alternative), awesome-lists
@@ -247,9 +277,14 @@ fix, `dangerouslySetInnerHTML` reviewed (only the static JSON-LD object — safe
    and images then need width/height + `next/image` or compression + `loading="lazy"` (perf checklist).
 3. **Lighthouse / Core Web Vitals** pass once deployed (the OG image + fonts are already optimised via
    `next/font` self-hosting; first load ~196 KB is fine).
-4. **Accessibility sweep:** focus-visible is themed (globals.css), but re-check colour contrast in the
-   CREAM chamber (muted text on cream), the wheel's `aria` on mobile, and keyboard reachability of the
-   contact form + nav. Decorative aura rings/dot-field are `aria-hidden` (good).
+4. **Accessibility sweep — MOSTLY DONE (2026-08-13).** All text/background pairs now pass WCAG AA in
+   both chambers (button, cream faint, cream record fixed; see §0). focus-visible themed, decorative
+   layers `aria-hidden`, single h1 per page, breadcrumbs on blog. **Remaining, minor:** the homepage
+   nav's section links are `hidden md:flex`, so on mobile there is no in-page section menu (only logo
+   + GitHub + Download show). For a one-page site that's defensible, but a small mobile menu (or
+   moving Blog into the always-visible row) would be a nice-to-have. The controlled language wheel is
+   `tabIndex -1` (scroll-driven, not keyboard-operable) but its content is fully stated in text and
+   the coverage band, so no information is keyboard-inaccessible.
 5. **Domain + Search Console + Bing Webmaster** (owner accounts) once `site.url` is the real domain.
 6. **Contact form:** wire the real Google Form (`site.contactForm`) or it stays mailto. If a Google
    Form is used, keep the `connect-src https://docs.google.com` in the CSP.

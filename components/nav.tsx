@@ -7,6 +7,7 @@ const links = [
   { href: '#how', label: 'How it works' },
   { href: '#features', label: 'Features' },
   { href: '#compare', label: 'Compare' },
+  { href: '/blog', label: 'Blog' },
 ]
 
 export function Nav() {

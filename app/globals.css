@@ -17,6 +17,10 @@
     --faint: 45 8% 50%;
     --line: 45 12% 20%;
     --accent: 227 100% 72%;
+    /* Filled-button background. Deliberately a touch deeper than --accent so WHITE button text
+       clears WCAG AA (white-on-accent at the light dark-chamber accent was only 2.97:1). Constant
+       across chambers (ThemeScroll never overwrites it), so the primary CTA is always legible. */
+    --accent-btn: 227 88% 56%;
     --record: 5 74% 62%;
   }
 
@@ -79,7 +83,7 @@
     @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[14px] px-6 py-3
            text-[16px] font-semibold transition-transform duration-150 active:translate-y-[1px];
   }
-  .btn-primary { background: hsl(var(--accent)); color: #fff; border: 2px solid hsl(var(--accent)); }
+  .btn-primary { background: hsl(var(--accent-btn)); color: #fff; border: 2px solid hsl(var(--accent-btn)); }
   .btn-primary:hover { filter: brightness(1.06); }
   .btn-ghost { border: 2px solid hsl(var(--ink) / 0.85); color: hsl(var(--ink)); background: transparent; }
   .btn-ghost:hover { background: hsl(var(--ink) / 0.06); }

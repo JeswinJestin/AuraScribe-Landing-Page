@@ -47,6 +47,7 @@ export function Footer() {
             <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-faint">Project</p>
             <ul className="mt-5 space-y-3 text-[15px]">
               <li><a href="/about" className="hover:text-accent">About</a></li>
+              <li><a href="/blog" className="hover:text-accent">Blog</a></li>
               <li>
                 <a href={site.github} target="_blank" rel="noreferrer" className="hover:text-accent">
                   Source on GitHub

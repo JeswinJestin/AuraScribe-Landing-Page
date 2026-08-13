@@ -14,15 +14,19 @@ import { site } from '@/lib/site'
 */
 export function PageShell({
   eyebrow,
+  breadcrumb,
   title,
   intro,
   updated,
+  meta,
   children,
 }: {
   eyebrow: string
+  breadcrumb?: React.ReactNode // when set, replaces the eyebrow (e.g. a Home / Blog crumb)
   title: string
   intro?: string
   updated?: string
+  meta?: React.ReactNode // when set, replaces the "Last updated" line (e.g. date + reading time)
   children: React.ReactNode
 }) {
   const year = new Date().getFullYear()
@@ -58,10 +62,12 @@ export function PageShell({
 
       <main className="container-x py-16 md:py-24">
         <div className="mx-auto max-w-[72ch]">
-          <p className="eyebrow">{eyebrow}</p>
+          {breadcrumb ? breadcrumb : <p className="eyebrow">{eyebrow}</p>}
           <h1 className="display mt-4 text-[44px] leading-[1.02] sm:text-[60px] md:text-[72px]">{title}</h1>
           {intro ? <p className="mt-6 max-w-[60ch] text-[19px] leading-relaxed text-muted">{intro}</p> : null}
-          {updated ? (
+          {meta ? (
+            <div className="mt-6">{meta}</div>
+          ) : updated ? (
             <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.14em] text-faint">Last updated {updated}</p>
           ) : null}
 
@@ -76,6 +82,7 @@ export function PageShell({
           <p>© {year} AuraScribe. Released under the MIT License.</p>
           <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <a href="/" className="hover:text-accent">Home</a>
+            <a href="/blog" className="hover:text-accent">Blog</a>
             <a href="/about" className="hover:text-accent">About</a>
             <a href="/privacy" className="hover:text-accent">Privacy</a>
             <a href="/terms" className="hover:text-accent">Terms</a>
