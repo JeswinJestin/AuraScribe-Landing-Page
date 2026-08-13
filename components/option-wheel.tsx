@@ -32,6 +32,9 @@ export type OptionWheelProps = {
   inset?: number
   loop?: boolean
   controlled?: boolean
+  // In controlled mode the wheel/drag/keyboard are disabled so it never traps page scroll. Set
+  // `selectable` to still allow a click on a label to jump to it (safe: a click cannot trap scroll).
+  selectable?: boolean
   className?: string
 }
 
@@ -54,6 +57,7 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
     inset = 40,
     loop = false,
     controlled = false,
+    selectable = false,
     className = '',
   },
   ref,
@@ -221,7 +225,8 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
 
   const handleItemClick = useCallback(
     (index: number) => {
-      if (controlled || dragMovedRef.current) return
+      // Clicks are allowed when interactive, OR when explicitly `selectable` in controlled mode.
+      if ((controlled && !selectable) || dragMovedRef.current) return
       const cfg = cfgRef.current as any
       const cur = targetRef.current
       let d = index - (((cur % cfg.count) + cfg.count) % cfg.count)
@@ -231,7 +236,7 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
       }
       applyTarget(cur + d, true)
     },
-    [applyTarget, controlled],
+    [applyTarget, controlled, selectable],
   )
 
   const handleKeyDown = useCallback(
@@ -265,7 +270,7 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
       role="listbox"
       tabIndex={controlled ? -1 : 0}
       aria-label="Languages"
-      className={`option-wheel${side === 'right' ? ' option-wheel--right' : ''}${isDragging ? ' option-wheel--dragging' : ''}${controlled ? ' option-wheel--controlled' : ''}${className ? ` ${className}` : ''}`}
+      className={`option-wheel${side === 'right' ? ' option-wheel--right' : ''}${isDragging ? ' option-wheel--dragging' : ''}${controlled ? ' option-wheel--controlled' : ''}${selectable ? ' option-wheel--selectable' : ''}${className ? ` ${className}` : ''}`}
       style={
         {
           '--ow-text-color': textColor,

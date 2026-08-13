@@ -176,4 +176,6 @@
 }
 .option-wheel--right .option-wheel__item { left: auto; right: var(--ow-inset); transform-origin: right center; }
 .option-wheel--controlled .option-wheel__item { cursor: default; }
+/* When controlled but selectable, labels are still clickable to jump — show it. */
+.option-wheel--selectable .option-wheel__item { cursor: pointer; }
 .option-wheel__item--selected { font-weight: 500; }
