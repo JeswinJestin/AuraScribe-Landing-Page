@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     default: 'AuraScribe — offline voice dictation for Windows, free and open source',
     template: '%s · AuraScribe',
   },
-  description: site.description,
+  description: site.metaDescription,
   keywords: site.keywords,
   authors: [{ name: 'Jeswin Thomas Jestin' }],
   alternates: { canonical: '/' },

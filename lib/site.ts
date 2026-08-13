@@ -14,8 +14,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https:
 export const site = {
   name: 'AuraScribe',
   tagline: 'Free, offline voice dictation for Windows.',
+  // Long description — used for OG/Twitter and the JSON-LD, where length is not penalised.
   description:
     'AuraScribe is a free, open-source, 100% offline voice dictation app for Windows. Press a hotkey, speak, and clean text appears in any app. A private, local alternative to Wispr Flow, Superwhisper, and Dragon. No cloud, no account, no subscription.',
+  // Short description for the <meta name="description"> tag — kept within the 160-char limit search
+  // engines display, so it is never truncated (the full one above is 248 chars).
+  metaDescription:
+    'Free, open-source, 100% offline voice dictation for Windows, and a private alternative to Wispr Flow. Press a hotkey, speak, and clean text appears in any app.',
   url: siteUrl,
   github: 'https://github.com/JeswinJestin/AuraScribe',
   releases: 'https://github.com/JeswinJestin/AuraScribe/releases/latest',
