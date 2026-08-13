@@ -14,18 +14,87 @@ How to get indexed, then how to actually rank and compete. On-page/technical SEO
 - Fast, static, mobile-clean (no horizontal scroll), WCAG AA contrast, security headers.
 - Canonical/OG use the primary `www.aurascribe.dev` (no redirect in the canonical or image URL).
 
-## Step 1 — get it indexed (do this first)
+## Step 1 — get it indexed (detailed)
 
-1. **Google Search Console** (https://search.google.com/search-console):
-   - Add a **Domain property** for `aurascribe.dev` (covers apex + www + all subpaths). Verify with
-     the **DNS TXT** record it gives you, added at name.com.
-   - **Sitemaps → submit** `https://www.aurascribe.dev/sitemap.xml`.
-   - **URL Inspection** → paste the homepage → **Request indexing**. Repeat for /about and /blog.
-2. **Bing Webmaster Tools** (https://www.bing.com/webmasters): add the site (you can import from
-   Google Search Console in one click) and submit the same sitemap. Bing also feeds DuckDuckGo and,
-   increasingly, AI answer engines.
-3. Confirm coverage over the next 1–3 weeks in Search Console → **Pages** (indexed vs not) and
-   **Performance** (impressions/clicks/queries).
+### 1a. Understand the two ways to verify (and which to pick)
+
+Both Google and Bing need to confirm you own the site. You are offered several methods; here is what
+each means and which to use:
+
+- **DNS record (TXT or CNAME)** — you add a record at your domain registrar (name.com). This proves
+  you own the whole DOMAIN, so it verifies `aurascribe.dev`, `www.aurascribe.dev`, and every page at
+  once. **This is the best method — use it for Google.** It does not depend on any file or the site
+  being up.
+- **HTML file upload / XML file** — you put a specific file at the site root
+  (`https://www.aurascribe.dev/<file>`). For this site that means committing the file to `public/`.
+  Bing's `BingSiteAuth.xml` is **already added** (in `public/BingSiteAuth.xml`) and deployed.
+- **HTML meta tag** — a `<meta>` tag in the site's `<head>`. Bing's tag (`msvalidate.01`) is
+  **already added** in `app/layout.tsx`, so Bing can verify by meta tag too.
+
+### 1b. Verify Bing (should work now — nothing left to code)
+
+Bing gave three options; two of them are now satisfied by the deployed site:
+1. **XML file** — Bing looks for `https://www.aurascribe.dev/BingSiteAuth.xml`. It now exists
+   (confirm by opening that URL in a browser — you should see the `<users><user>…` XML). In Bing
+   Webmaster, pick "XML File" and click **Verify**.
+2. **HTML meta tag** — the `<meta name="msvalidate.01" content="3BB68E671EFDBCEC0E777C1BF54853D7">`
+   tag is now in the home page `<head>`. In Bing, pick "HTML Meta Tag" and click **Verify**.
+   (Earlier it failed only because the site had not been redeployed with the tag yet.)
+3. **CNAME** (optional) — if you prefer DNS: at name.com add a CNAME record with **Host/Name**
+   `17eeac7c45c4f09d938a4fb2a0abc9ea` and **Value/Target** `verify.bing.com`, then Verify.
+
+You only need ONE to succeed. The XML file or meta tag is easiest now — just click Verify.
+
+### 1c. Verify Google Search Console (use the DNS TXT method)
+
+1. Go to https://search.google.com/search-console → **Add property**.
+2. Choose the **Domain** property type (left box), enter `aurascribe.dev` (no https, no www).
+3. Google shows a **TXT record** to add, like `google-site-verification=abc123…`. Copy it.
+4. Add it at name.com (see 1d), then come back and click **Verify**. DNS can take a few minutes to a
+   couple of hours to propagate; if it fails immediately, wait and retry.
+
+### 1d. How to add a DNS record at name.com (step by step)
+
+1. Log in at name.com → **My Domains** → click **aurascribe.dev**.
+2. Open the **DNS Records** (or "Manage DNS Records") page.
+3. Click **Add Record**. For each record set the fields:
+   - **Google verification (TXT):** Type = `TXT`, Host = `@` (means the root domain), Answer/Value =
+     the full `google-site-verification=…` string, TTL = default (300). Save.
+   - **Bing CNAME (only if you chose that method):** Type = `CNAME`, Host =
+     `17eeac7c45c4f09d938a4fb2a0abc9ea`, Answer/Value = `verify.bing.com`, TTL = default. Save.
+4. **Do not touch** the existing records that point the site to Vercel (the A record on `@` and the
+   CNAME on `www`) — verification records are added alongside them, they do not replace them.
+5. Wait for propagation, then click Verify in the respective console.
+
+### 1e. Submit the sitemap and request indexing
+
+Once verified in Google Search Console:
+1. **Sitemaps** (left menu) → enter `sitemap.xml` → **Submit**. Full URL:
+   `https://www.aurascribe.dev/sitemap.xml`. It should read "Success" and list 10 discovered URLs.
+2. **URL Inspection** (top search bar) → paste `https://www.aurascribe.dev/` → **Request indexing**.
+   Repeat for `/about`, `/blog`, and each blog post. This nudges Google to crawl them sooner.
+3. In Bing Webmaster → **Sitemaps** → submit the same URL.
+
+### 1f. "Pages not indexed" / visibility — what it means and how to fix
+
+Submitting a sitemap does **not** instantly index every page — Google decides per URL, and it takes
+days to weeks for a brand-new domain. To diagnose:
+1. Search Console → **Indexing → Pages**. It splits URLs into **"Indexed"** vs **"Not indexed"** with
+   a reason for each (e.g. "Discovered – currently not indexed", "Crawled – currently not indexed").
+2. For a new site these reasons are usually just **"give it time"** — Google crawls, then indexes over
+   subsequent visits. **Request indexing** (1e) speeds the important pages.
+3. Make sure nothing blocks indexing (all already correct on this site, but to confirm): the page has
+   no `noindex` (our `robots` is `index, follow`), `robots.txt` allows all, and the canonical points
+   to the same URL (it does, to the `www` version).
+4. If a page shows **"Alternate page with proper canonical tag"** for the bare-apex or non-www URL,
+   that is EXPECTED and fine — those are the redirecting duplicates; the `www` canonical is the one
+   that gets indexed.
+5. Re-check weekly. Impressions in **Performance** are the first sign it is working, before clicks.
+
+### 1g. Also do
+
+Bing feeds DuckDuckGo and increasingly AI answer engines, so keep both consoles active. Give the
+whole thing 1–3 weeks and keep an eye on **Pages** (coverage) and **Performance** (queries).
 
 ## Step 2 — match search intent (biggest on-page lever)
 
