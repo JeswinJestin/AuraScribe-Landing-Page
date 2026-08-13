@@ -5,7 +5,11 @@
   Override with NEXT_PUBLIC_SITE_URL only if the domain ever changes. site.url is read server-side
   (metadata, sitemap, robots, JSON-LD).
 */
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https://aurascribe.dev'
+// NOTE: Vercel serves www.aurascribe.dev as the PRIMARY domain (the bare apex 308-redirects to it),
+// so the canonical/sitemap/OG must use www — otherwise the canonical and the social-preview image URL
+// would point at a redirecting apex, which some social scrapers refuse to follow. If you later make
+// the bare apex the primary domain in Vercel (www -> apex), change this back to 'https://aurascribe.dev'.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https://www.aurascribe.dev'
 
 export const site = {
   name: 'AuraScribe',
