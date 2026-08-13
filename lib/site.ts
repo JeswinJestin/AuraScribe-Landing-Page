@@ -1,17 +1,11 @@
 /*
-  Canonical site origin. Resolved in this order so the deployed canonicals / sitemap / OG tags are
-  always correct WITHOUT hardcoding a domain we do not own:
-    1. NEXT_PUBLIC_SITE_URL         — explicit override (set this if/when a real domain is bought).
-    2. VERCEL_PROJECT_PRODUCTION_URL — Vercel sets this automatically to the stable production
-                                       *.vercel.app URL, so the default Vercel link Just Works.
-    3. fallback                      — only hit in local dev, where canonicals don't matter.
-  site.url is only read in server code (metadata, sitemap, robots, JSON-LD), so the non-public
-  Vercel env var is available at build/runtime.
+  Canonical site origin. The production domain (bought from name.com) is aurascribe.dev, so that is
+  the default and every page's canonical / sitemap / OG points at it — even on a preview or the raw
+  *.vercel.app URL, which is exactly what you want (previews should never be indexed as canonical).
+  Override with NEXT_PUBLIC_SITE_URL only if the domain ever changes. site.url is read server-side
+  (metadata, sitemap, robots, JSON-LD).
 */
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '') ||
-  'https://aurascribe.app'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https://aurascribe.dev'
 
 export const site = {
   name: 'AuraScribe',
