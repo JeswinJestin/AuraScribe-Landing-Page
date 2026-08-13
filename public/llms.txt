@@ -1,0 +1,31 @@
+# AuraScribe
+
+> Free, open-source, 100% offline voice dictation for Windows. Press a hotkey, speak, and clean
+> punctuated text is typed into any application. Every word is transcribed on the user's own PC,
+> so nothing is sent to the cloud. No account, no subscription. MIT licensed.
+
+## What it is
+- On-device (offline) speech-to-text for Windows 10 and 11 (64-bit).
+- Global hotkey (default Ctrl+Shift+Space) dictates into whatever app has the cursor.
+- Installer is about 8.6 MB; runs faster than real time on an ordinary CPU.
+- Automatic local cleanup: punctuation, capitalisation, and filler-word removal.
+- A private, local alternative to Wispr Flow, Superwhisper, Dragon, and Windows Voice Typing.
+
+## Languages and engines (all on-device)
+- English — Moonshine (Useful Sensors).
+- 25 European languages — NVIDIA Parakeet TDT.
+- ~40 Asian languages — Dolphin (DataoceanAI, Tsinghua).
+- Malayalam and Kannada — IndicConformer (AI4Bharat).
+- Inference runs on sherpa-onnx (k2-fsa) and ONNX Runtime; the app shell is Tauri.
+
+## Privacy
+- The only network request the app ever makes is downloading a speech model once.
+- No telemetry, no analytics, no account.
+
+## Links
+- Download (Windows): https://github.com/JeswinJestin/AuraScribe/releases/latest
+- Source code (MIT): https://github.com/JeswinJestin/AuraScribe
+- Sponsor: https://github.com/sponsors/JeswinJestin
+
+## Author
+Jeswin Thomas Jestin.

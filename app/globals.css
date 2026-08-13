@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  AuraScribe landing — editorial system: a warm cream / near-black "broadsheet" that alternates
+  chambers as you scroll (see components/theme-scroll.tsx). Tokens below are the DEFAULT (dark,
+  the hero); ThemeScroll overwrites them per section and the transitions here blend the change.
+  Accent stays indigo in every chamber (our identity, distinct from the reference's lavender).
+*/
+@layer base {
+  :root {
+    --bg: 48 22% 6%;
+    --surface: 45 14% 10%;
+    --ink: 45 30% 93%;
+    --muted: 45 10% 66%;
+    --faint: 45 8% 50%;
+    --line: 45 12% 20%;
+    --accent: 227 100% 72%;
+    --record: 5 74% 62%;
+  }
+
+  html { scroll-behavior: auto; }
+
+  body {
+    background-color: hsl(var(--bg));
+    color: hsl(var(--ink));
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color var(--theme-transition, 1.1s) ease,
+      color var(--theme-transition, 1.1s) ease;
+  }
+
+  /* Smoothly re-tint everything that carries a theme token as the chamber changes. */
+  .card, .glass, .btn-primary, .btn-ghost, kbd, .eyebrow,
+  h1, h2, h3, h4, p, blockquote, th, td, li {
+    transition: background-color var(--theme-transition, 1.1s) ease,
+      color var(--theme-transition, 1.1s) ease, border-color var(--theme-transition, 1.1s) ease;
+  }
+  /* Never smear per-frame animated surfaces during a theme change. */
+  .option-wheel__item, .meter-tick, canvas { transition: none; }
+
+  ::selection { background: hsl(var(--accent)); color: #fff; }
+  :focus-visible { outline: 2px solid hsl(var(--accent)); outline-offset: 2px; border-radius: 4px; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-content px-6 sm:px-10; }
+
+  /* Eyebrow: small caps label, Figtree, not mono. One per few sections. */
+  .eyebrow {
+    @apply text-[13px] font-semibold uppercase tracking-[0.14em];
+    color: hsl(var(--accent));
+  }
+
+  /* Editorial card: flat, 2px hairline, oversized radius. No shadow (border-driven depth). */
+  .card {
+    background-color: hsl(var(--surface));
+    border: 2px solid hsl(var(--line));
+    border-radius: 28px;
+  }
+
+  /* Frosted panel (used on the dark hero only) with a solid fallback. */
+  .glass {
+    background: hsl(var(--surface) / 0.72);
+    backdrop-filter: blur(18px) saturate(1.3);
+    -webkit-backdrop-filter: blur(18px) saturate(1.3);
+    border: 2px solid hsl(var(--line));
+    border-radius: 28px;
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    .glass { background: hsl(var(--surface)); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  }
+
+  /* whitespace-nowrap: a button label must never wrap to a second line. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[14px] px-6 py-3
+           text-[16px] font-semibold transition-transform duration-150 active:translate-y-[1px];
+  }
+  .btn-primary { background: hsl(var(--accent)); color: #fff; border: 2px solid hsl(var(--accent)); }
+  .btn-primary:hover { filter: brightness(1.06); }
+  .btn-ghost { border: 2px solid hsl(var(--ink) / 0.85); color: hsl(var(--ink)); background: transparent; }
+  .btn-ghost:hover { background: hsl(var(--ink) / 0.06); }
+
+  /* Editorial display heading helper: EB Garamond, weight 400, tight leading, negative tracking. */
+  .display {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  /*
+    Long-form reading column for the content pages (About / Terms / Privacy). Same editorial
+    system as the landing page: serif display headings, Figtree body at a comfortable measure,
+    hairline rules, indigo links. Reads the theme tokens like everything else.
+  */
+  .prose { max-width: 68ch; }
+  .prose > * + * { margin-top: 1.15rem; }
+  .prose h2 {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+    margin-top: 3.25rem;
+    padding-top: 2.25rem;
+    border-top: 2px solid hsl(var(--line));
+    color: hsl(var(--ink));
+  }
+  .prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  .prose h3 {
+    font-size: 1.12rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    color: hsl(var(--ink));
+  }
+  .prose p, .prose li { color: hsl(var(--muted)); font-size: 17px; line-height: 1.65; }
+  .prose strong { color: hsl(var(--ink)); font-weight: 600; }
+  .prose a { color: hsl(var(--accent)); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a:hover { filter: brightness(1.08); }
+  .prose ul { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .prose ul li { position: relative; padding-left: 1.4rem; }
+  .prose ul li::before {
+    content: ''; position: absolute; left: 0; top: 0.72em;
+    width: 6px; height: 6px; border-radius: 9999px; background: hsl(var(--accent));
+  }
+  .prose code {
+    font-family: var(--font-mono, ui-monospace), monospace;
+    font-size: 0.86em;
+    background: hsl(var(--ink) / 0.06);
+    border: 1px solid hsl(var(--line));
+    border-radius: 6px;
+    padding: 0.08em 0.4em;
+    color: hsl(var(--ink));
+  }
+}
+
+/* OptionWheel (React Bits, adapted) — labels in the display serif, brand-coloured. */
+.option-wheel {
+  --ow-text-color: hsl(var(--faint));
+  --ow-active-color: hsl(var(--accent));
+  --ow-font-size: 3rem;
+  --ow-inset: 40px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  outline: none;
+}
+.option-wheel--controlled { cursor: default; touch-action: auto; }
+.option-wheel--dragging { cursor: grabbing; }
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  white-space: nowrap;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--ow-font-size);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color));
+}
+.option-wheel--right .option-wheel__item { left: auto; right: var(--ow-inset); transform-origin: right center; }
+.option-wheel--controlled .option-wheel__item { cursor: default; }
+.option-wheel__item--selected { font-weight: 500; }
