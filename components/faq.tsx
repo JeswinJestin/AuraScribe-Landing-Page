@@ -20,13 +20,18 @@ export function Faq() {
           </Reveal>
         </div>
 
+        {/* dt/dd must sit directly inside a <div> that is a direct child of <dl> (accessibility:
+            the definition-list structure rule). Reveal renders that div itself (via className), so
+            there is no extra wrapper nesting the dt/dd another level deep. */}
         <dl>
           {faqs.map((f, i) => (
-            <Reveal key={f.q} delay={i * 0.04}>
-              <div className={`py-8 ${i > 0 ? 'border-t-2 border-line' : 'pt-0'}`}>
-                <dt className="display text-[22px] leading-tight sm:text-[26px]">{f.q}</dt>
-                <dd className="mt-3 max-w-[62ch] text-[16px] leading-relaxed text-muted">{f.a}</dd>
-              </div>
+            <Reveal
+              key={f.q}
+              delay={i * 0.04}
+              className={`py-8 ${i > 0 ? 'border-t-2 border-line' : 'pt-0'}`}
+            >
+              <dt className="display text-[22px] leading-tight sm:text-[26px]">{f.q}</dt>
+              <dd className="mt-3 max-w-[62ch] text-[16px] leading-relaxed text-muted">{f.a}</dd>
             </Reveal>
           ))}
         </dl>
