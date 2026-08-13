@@ -27,12 +27,11 @@ export const site = {
   },
   // Visible contact address (SEO/trust). Dedicated inbox for the site's contact form + support.
   contactEmail: 'contact.aurascribe@gmail.com',
-  // Optional Google Forms wiring. Leave `formAction` empty to use the mailto fallback (works with
-  // no setup). To use a Google Form: create it, then from its pre-filled link copy the
-  // /formResponse URL and each field's entry.<id> into the mapping below.
+  // Google Form wiring for the contact form. `formAction` is the form's /formResponse URL; `fields`
+  // maps each input to the form's entry.<id>. Submissions land in the linked Google Form/Sheet.
   contactForm: {
-    formAction: '', // e.g. 'https://docs.google.com/forms/d/e/FORM_ID/formResponse'
-    fields: { name: 'entry.000000001', email: 'entry.000000002', message: 'entry.000000003' },
+    formAction: 'https://docs.google.com/forms/d/e/1FAIpQLScEBSsPLHrrbkKJcsAfWGySxlWHRCnLV4KDfm4yYyNWNaLmRQ/formResponse',
+    fields: { name: 'entry.2005620554', email: 'entry.1045781291', message: 'entry.1166974658' },
   },
   keywords: [
     'voice dictation',
