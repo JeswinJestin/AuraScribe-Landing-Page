@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${site.url}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${site.url}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
+    { url: `${site.url}/license`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     ...postEntries,
   ]
 }

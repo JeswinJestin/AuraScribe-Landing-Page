@@ -88,6 +88,7 @@ export function PageShell({
             <a href="/about" className="hover:text-accent">About</a>
             <a href="/privacy" className="hover:text-accent">Privacy</a>
             <a href="/terms" className="hover:text-accent">Terms</a>
+            <a href="/license" className="hover:text-accent">License</a>
             <a
               href={site.github}
               target="_blank"

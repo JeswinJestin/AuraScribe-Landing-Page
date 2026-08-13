@@ -92,7 +92,7 @@ export default function AboutPage() {
       <h2>Free, open, and giving back</h2>
       <p>
         AuraScribe is released under the{' '}
-        <a href={`${site.github}/blob/master/LICENSE`} target="_blank" rel="noreferrer">
+        <a href="/license">
           MIT License
         </a>{' '}
         and free forever, with no paid tier and no account to create. The full source lives{' '}

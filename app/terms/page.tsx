@@ -33,7 +33,7 @@ export default function TermsPage() {
       <h2>Licence</h2>
       <p>
         AuraScribe is released under the{' '}
-        <a href={`${site.github}/blob/master/LICENSE`} target="_blank" rel="noreferrer">
+        <a href="/license">
           MIT License
         </a>
         . That licence, not this page, governs your rights to use, copy, modify, and redistribute the

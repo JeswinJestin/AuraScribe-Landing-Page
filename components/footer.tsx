@@ -64,7 +64,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`${site.github}/blob/master/LICENSE`} target="_blank" rel="noreferrer" className="hover:text-accent">
+                <a href="/license" className="hover:text-accent">
                   MIT License
                 </a>
               </li>
