@@ -67,6 +67,9 @@ const jsonLd = {
       '@type': 'SoftwareApplication',
       '@id': `${site.url}/#app`,
       name: 'AuraScribe',
+      // Spelling variants people search for, so Google resolves them all to THIS entity and stops
+      // conflating it with the unrelated "Aura AI Scribe" (medical) / "auraScribe.co" (meeting notes).
+      alternateName: ['Aura Scribe', 'aurascribe', 'Aura Scribe app'],
       applicationCategory: 'UtilitiesApplication',
       applicationSubCategory: 'Voice dictation',
       operatingSystem: 'Windows 10, Windows 11',
@@ -92,7 +95,9 @@ const jsonLd = {
       '@id': `${site.url}/#website`,
       url: site.url,
       name: 'AuraScribe',
+      alternateName: ['Aura Scribe', 'aurascribe'],
       description: site.description,
+      publisher: { '@id': `${site.url}/#jeswin` },
     },
     {
       '@type': 'FAQPage',

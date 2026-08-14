@@ -65,6 +65,23 @@ export const site = {
     'Malayalam speech to text',
     'Kannada speech to text',
     'Kannada dictation',
+    // Natural-language phrasings real people type into search. These feed the (Google-ignored)
+    // meta-keywords tag, so they are near-useless for ranking on their own; the real ranking work
+    // is the visible copy, headings, FAQ and blog posts. Kept here for Bing/other engines + record.
+    'AuraScribe',
+    'talk to type',
+    'talk and type app',
+    'type with your voice',
+    'voice to text Windows',
+    'dictation app for Windows',
+    'best free dictation software',
+    'best voice typing tool for Windows',
+    'free voice typing app',
+    'free dictation tool',
+    'speech recognition software Windows',
+    'AI dictation app',
+    'offline AI dictation',
+    'Jeswin Thomas Jestin',
   ],
 }
 

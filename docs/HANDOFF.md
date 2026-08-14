@@ -4,7 +4,38 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-13 (wheel rebuilt timer-based, Home moved above title, LinkedIn+Behance) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-14 (LIVE at www.aurascribe.dev; favicon.ico + brand schema fix; SEO launch checklist) · **Owner:** Jeswin Thomas Jestin
+
+**DEPLOYED (2026-08-14):** the site is live at **https://www.aurascribe.dev** (owner bought the `.dev`
+domain; apex 308-redirects to `www`, which is canonical — verified on the live site). So `site.url`
+resolves to the www host (`NEXT_PUBLIC_SITE_URL` is set in Vercel). Earlier notes saying "not yet
+deployed" are stale.
+
+**CRITICAL (2026-08-14, later):** the favicon + brand-schema fixes below were made last session but
+**never committed or pushed**, so they were NOT live — `https://www.aurascribe.dev/favicon.ico` still
+returned **404** and the blank globe persisted. This session committed them (favicon.ico, layout
+schema, HANDOFF, SEO checklist) and expanded `site.keywords` in `lib/site.ts` with natural-language
+search phrasings (talk to type, voice to text Windows, best free dictation software, the brand + maker
+name, etc.). NOTE: those keywords feed the `<meta keywords>` tag, which **Google ignores** — real
+ranking work is the visible copy/headings/FAQ/blog + backlinks + time, not hidden keywords. tsc + build
+verified clean; favicon.ico confirmed a valid 16/32/48 ICO emitting the `/favicon.ico` route. **Still
+needs `git push` to deploy** (owner confirms the push).
+
+**This session (2026-08-14) — favicon + SEO launch fixes:**
+- **Root favicon added — `app/favicon.ico`** (multi-size 16/32/48, generated from `app/icon.png`).
+  Before this, `https://www.aurascribe.dev/favicon.ico` returned **404** (app-router only had
+  `icon.png`), which is why Google showed a blank globe. Build now emits the route and every page
+  `<head>` includes `<link rel="icon" href="/favicon.ico">`. Verified in the build output; **needs a
+  deploy to go live**, then Google refetches the favicon on its own schedule (days–weeks).
+- **Brand disambiguation schema** — added `alternateName` (`Aura Scribe`, `aurascribe`, `Aura Scribe
+  app`) to the `SoftwareApplication` and `WebSite` JSON-LD, plus `publisher` → the maker `Person`, so
+  Google resolves spelling variants to this entity and stops conflating it with the unrelated
+  "Aura AI Scribe" (medical) / "auraScribe.co" (meeting notes).
+- **New: `docs/SEO-LAUNCH-CHECKLIST.md`** — the complete, current post-deploy sequence (GSC domain
+  verify + sitemap + request-indexing, Bing import, favicon timing, brand-term/backlink strategy,
+  validation). This supersedes the scattered SEO to-dos for launch actions.
+- Verified: `npx tsc --noEmit` clean, `npm run build` clean (favicon route + head link confirmed in
+  `.next`).
 
 **This session's smaller changes:** (1) Content pages: the "Home" link moved OUT of the top nav into a
 "Back to home" link right above each page title (`page-shell.tsx`); the top bar is now just the logo
