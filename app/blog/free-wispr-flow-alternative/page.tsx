@@ -71,7 +71,7 @@ export default function Page() {
         server, AuraScribe is the free, local, open alternative. You can see the full feature grid on
         the <a href="/#compare">comparison section of the home page</a>, or{' '}
         <a href={site.releases} target="_blank" rel="noreferrer">
-          download it for Windows
+          download it
         </a>{' '}
         and judge it against whatever you use now.
       </p>

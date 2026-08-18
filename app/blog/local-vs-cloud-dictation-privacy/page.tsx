@@ -67,7 +67,7 @@ export default function Page() {
         </a>
         , or{' '}
         <a href={site.releases} target="_blank" rel="noreferrer">
-          download AuraScribe for Windows
+          download AuraScribe
         </a>{' '}
         and keep dictation entirely offline.
       </p>

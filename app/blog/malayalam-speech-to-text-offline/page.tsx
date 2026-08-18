@@ -65,7 +65,7 @@ export default function Page() {
         If you have wanted to dictate in Malayalam or Kannada without handing your voice to a server,
         you can{' '}
         <a href={site.releases} target="_blank" rel="noreferrer">
-          download AuraScribe for Windows
+          download AuraScribe
         </a>
         , choose the Malayalam or Kannada model, and try it. It is honest work in progress, and real
         feedback from native speakers is the most useful thing you can send back.

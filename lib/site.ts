@@ -23,6 +23,8 @@ export const site = {
     'Free, open-source, 100% offline voice dictation for Windows, macOS & Linux, and a private alternative to Wispr Flow. Press a hotkey, speak, and clean text appears in any app.',
   url: siteUrl,
   github: 'https://github.com/JeswinJestin/AuraScribe',
+  // owner/repo slug, used to query the GitHub Releases API for per-OS direct downloads.
+  ghRepo: 'JeswinJestin/AuraScribe',
   releases: 'https://github.com/JeswinJestin/AuraScribe/releases/latest',
   sponsor: 'https://github.com/sponsors/JeswinJestin',
   coffee: 'https://buymeacoffee.com/jes.weee',
@@ -115,7 +117,7 @@ export const faqs = [
   },
   {
     q: 'Is there a macOS or Linux version?',
-    a: 'Windows is the fully supported platform. macOS and Linux builds are in early beta on the GitHub releases page: they install and run, and dictation is newly added and looking for feedback. On macOS you grant an Accessibility permission the first time; on Linux it works best in an X11 session.',
+    a: 'Yes. As of version 2.0, AuraScribe runs on Windows, macOS (Apple Silicon), and Linux (Debian and Ubuntu), all from the releases page. Windows is the most battle-tested; macOS and Linux are newer. On macOS you approve it once in Privacy and Security (it is not notarized) and grant an Accessibility permission; on Linux it works best in an X11 session. The download button picks the right build for your system automatically.',
   },
   {
     q: 'Does it work in every application?',

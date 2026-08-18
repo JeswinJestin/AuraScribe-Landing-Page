@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { GithubLogo, DownloadSimple } from '@phosphor-icons/react/dist/ssr'
+import { GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
+import { DownloadButton } from './download'
 
 const links = [
   { href: '#reach', label: 'Languages' },
@@ -42,10 +43,7 @@ export function Nav() {
             >
               <GithubLogo size={18} weight="fill" />
             </a>
-            <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary !px-4 !py-2 !text-[14px]">
-              <DownloadSimple size={16} weight="bold" />
-              Download
-            </a>
+            <DownloadButton className="btn btn-primary !px-4 !py-2 !text-[14px]" />
           </div>
         </nav>
       </div>

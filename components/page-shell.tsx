@@ -1,5 +1,6 @@
-import { DownloadSimple, ArrowLeft, GithubLogo } from '@phosphor-icons/react/dist/ssr'
+import { ArrowLeft, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
+import { DownloadButton } from './download'
 
 /*
   PageShell — the chrome for the standalone content pages (About / Terms / Privacy).
@@ -44,10 +45,7 @@ export function PageShell({
             </span>
             <span className="font-display text-[19px] font-semibold tracking-tight">AuraScribe</span>
           </a>
-          <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary !px-4 !py-2 !text-[14px]">
-            <DownloadSimple size={16} weight="bold" />
-            Download
-          </a>
+          <DownloadButton className="btn btn-primary !px-4 !py-2 !text-[14px]" />
         </div>
       </header>
 

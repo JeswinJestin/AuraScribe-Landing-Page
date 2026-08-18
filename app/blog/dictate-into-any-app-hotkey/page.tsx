@@ -23,7 +23,7 @@ export default function Page() {
 
       <h2>1. Install and pick a language</h2>
       <p>
-        Download AuraScribe for Windows and run the small installer. On first launch, a short
+        Download AuraScribe for your system and run the small installer. On first launch, a short
         walkthrough helps you pick a speech model. Choose the language you dictate in, and it
         downloads once. If you mostly write in English, the recommended English model is fast and
         light. You can add more languages later.
@@ -69,7 +69,7 @@ export default function Page() {
       <p>
         That is the whole workflow. If you have not set it up yet, you can{' '}
         <a href={site.releases} target="_blank" rel="noreferrer">
-          download AuraScribe for Windows
+          download AuraScribe
         </a>{' '}
         and be dictating into any app within a couple of minutes.
       </p>

@@ -56,7 +56,7 @@ const flow = [
   {
     n: '01',
     verb: 'Press',
-    body: 'Hit Ctrl + Shift + Space in whatever window you are already in. AuraScribe is listening straight away, even with its own window closed, so nothing interrupts what you were doing.',
+    body: 'Hit Ctrl + Shift + Space (Cmd + Shift + Space on a Mac) in whatever window you are already in. AuraScribe is listening straight away, even with its own window closed, so nothing interrupts what you were doing.',
     aside: 'Rebindable to any combination',
   },
   {
@@ -69,7 +69,20 @@ const flow = [
     n: '03',
     verb: 'Release',
     body: 'The finished text is typed into the app that had your cursor. No copy, no paste, no switching windows, and no dialog asking you to confirm anything.',
-    aside: 'Works in any Windows app',
+    aside: 'Works in any app on Windows, macOS and Linux',
+  },
+]
+
+/* First-run setup differs slightly per OS, so say it plainly rather than pretend it is identical. */
+const setup: { os: string; note: string }[] = [
+  { os: 'Windows', note: 'Run the installer, pick a voice model, and start dictating. Nothing else to set up.' },
+  {
+    os: 'macOS',
+    note: 'Open it once from System Settings, Privacy and Security (the app is not notarized yet), then grant the Accessibility permission so it can type for you. Apple Silicon.',
+  },
+  {
+    os: 'Linux',
+    note: 'Install the .deb on Debian or Ubuntu. Use an X11 login session for the global hotkey and typing, since Wayland restricts synthetic input.',
   },
 ]
 
@@ -103,6 +116,21 @@ export function HowItWorks() {
               </div>
             </Reveal>
           ))}
+
+          {/* Per-OS first run: the same three keys everywhere, with the small setup each platform needs. */}
+          <Reveal delay={0.1}>
+            <div className="mt-4 border-t-2 border-line pt-10">
+              <p className="eyebrow">Setting up on each platform</p>
+              <dl className="mt-6 flex flex-col gap-5">
+                {setup.map((s) => (
+                  <div key={s.os} className="grid grid-cols-[86px_1fr] gap-4 sm:gap-6">
+                    <dt className="pt-[3px] font-mono text-[12px] uppercase tracking-wide text-accent">{s.os}</dt>
+                    <dd className="max-w-[46ch] text-[15px] leading-relaxed text-muted">{s.note}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

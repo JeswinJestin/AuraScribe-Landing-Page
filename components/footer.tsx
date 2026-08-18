@@ -1,6 +1,7 @@
-import { DownloadSimple, GithubLogo, Heart, Coffee, LinkedinLogo, BehanceLogo } from '@phosphor-icons/react/dist/ssr'
+import { GithubLogo, Heart, Coffee, LinkedinLogo, BehanceLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
 import { Reveal } from './primitives'
+import { DownloadButton } from './download'
 
 /*
   Footer — the closing chamber. An oversized serif wordmark anchors it (the reference's
@@ -18,15 +19,12 @@ export function Footer() {
             <div>
               <p className="display text-[52px] leading-none sm:text-[76px] md:text-[92px]">AuraScribe</p>
               <p className="mt-6 max-w-[42ch] text-[17px] leading-relaxed text-muted">
-                Free, open-source voice dictation for Windows. Every word is transcribed on your own
-                machine, and it stays there.
+                Free, open-source voice dictation for Windows, macOS, and Linux. Every word is
+                transcribed on your own machine, and it stays there.
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-3">
-              <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary">
-                <DownloadSimple size={18} weight="bold" />
-                Download for Windows
-              </a>
+              <DownloadButton />
             </div>
           </div>
         </Reveal>

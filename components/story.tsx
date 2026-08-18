@@ -9,10 +9,9 @@
 */
 
 import { Fragment, useEffect, useRef } from 'react'
-import { DownloadSimple, GithubLogo } from '@phosphor-icons/react/dist/ssr'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { site } from '@/lib/site'
+import { DownloadButtons } from './download'
 import DotField from './dot-field'
 import { ParallaxTurn } from './parallax-turn'
 import { LanguageWheel } from './language-wheel'
@@ -72,22 +71,12 @@ function SceneHero() {
         ))}
       </h1>
       <p className="hero-sub relative mx-auto mt-7 max-w-[54ch] text-[18px] leading-relaxed text-muted sm:text-[20px]">
-        AuraScribe turns speech into clean, punctuated text in any Windows app. Tap a hotkey, talk, and
-        it lands the moment you stop. Every word is transcribed on your own PC, so there is no account,
-        no subscription, and nothing sent to a server.
+        AuraScribe turns speech into clean, punctuated text in any app, on Windows, macOS, and Linux.
+        Tap a hotkey, talk, and it lands the moment you stop. Every word is transcribed on your own
+        machine, so there is no account, no subscription, and nothing sent to a server.
       </p>
-      <div className="hero-cta relative mt-9 flex flex-col items-center gap-4">
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary">
-            <DownloadSimple size={18} weight="bold" />
-            Download for Windows
-          </a>
-          <a href={site.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
-            <GithubLogo size={18} weight="fill" />
-            View on GitHub
-          </a>
-        </div>
-        <p className="font-mono text-[13px] text-faint">~9 MB · Windows 10 and 11 · MIT licensed</p>
+      <div className="hero-cta relative mt-9">
+        <DownloadButtons caption="Windows · macOS (Apple Silicon) · Linux · MIT licensed" />
       </div>
     </section>
   )
@@ -171,18 +160,11 @@ function SceneInvitation() {
         It runs on your machine. Full stop.
       </h2>
       <p className="invite-el relative mx-auto mt-7 max-w-[50ch] text-[18px] leading-relaxed text-muted sm:text-[20px]">
-        Download the installer, set a hotkey, and start dictating in under a minute. No account to create,
-        nothing to pay, and no cloud to trust with your voice.
+        Download the installer for your system, set a hotkey, and start dictating in under a minute.
+        No account to create, nothing to pay, and no cloud to trust with your voice.
       </p>
-      <div className="invite-el relative mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a href={site.releases} target="_blank" rel="noreferrer" className="btn btn-primary">
-          <DownloadSimple size={18} weight="bold" />
-          Download for Windows
-        </a>
-        <a href={site.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
-          <GithubLogo size={18} weight="fill" />
-          View on GitHub
-        </a>
+      <div className="invite-el relative mt-9">
+        <DownloadButtons />
       </div>
     </section>
   )
