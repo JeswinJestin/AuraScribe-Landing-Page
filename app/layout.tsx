@@ -78,7 +78,7 @@ const jsonLd = {
       url: site.url,
       downloadUrl: site.releases,
       softwareVersion: '1.0.0',
-      fileSize: '8.6 MB',
+      fileSize: '9 MB',
       license: 'https://opensource.org/licenses/MIT',
       isAccessibleForFree: true,
       featureList: [

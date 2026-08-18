@@ -170,7 +170,7 @@ AuraScribe's real, defensible advantages over Wispr Flow / Superwhisper / Dragon
    round-trip latency.
 4. **Languages others skip** — accurate, local **Malayalam and Kannada** (plus 25 European, ~40
    Asian). This is a near-unique, high-intent niche with low competition.
-5. **Lightweight** — ~8.6 MB installer, runs on an ordinary CPU.
+5. **Lightweight** — ~9 MB installer, runs on an ordinary CPU.
 
 Lead with whichever of these matches the searcher's intent. The Malayalam/Kannada angle in
 particular is where you can rank #1 quickly because almost no one else serves it locally.

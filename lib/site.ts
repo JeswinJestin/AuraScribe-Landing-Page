@@ -106,7 +106,11 @@ export const faqs = [
   },
   {
     q: 'What are the system requirements?',
-    a: 'Windows 10 or 11 (64-bit) and a microphone. The installer is about 8.6 MB and runs faster than real time on an ordinary CPU. No internet is needed after the first model download.',
+    a: 'Windows 10 or 11 (64-bit) and a microphone. The installer is about 9 MB and runs faster than real time on an ordinary CPU. No internet is needed after the first model download.',
+  },
+  {
+    q: 'Is there a macOS or Linux version?',
+    a: 'Windows is the fully supported platform. macOS and Linux builds are in early beta on the GitHub releases page: they install and run, and dictation is newly added and looking for feedback. On macOS you grant an Accessibility permission the first time; on Linux it works best in an X11 session.',
   },
   {
     q: 'Does it work in every application?',

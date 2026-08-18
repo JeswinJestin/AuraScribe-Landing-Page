@@ -87,7 +87,7 @@ function SceneHero() {
             View on GitHub
           </a>
         </div>
-        <p className="font-mono text-[13px] text-faint">~8.6 MB · Windows 10 and 11 · MIT licensed</p>
+        <p className="font-mono text-[13px] text-faint">~9 MB · Windows 10 and 11 · MIT licensed</p>
       </div>
     </section>
   )

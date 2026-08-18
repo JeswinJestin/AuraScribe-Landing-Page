@@ -60,7 +60,7 @@ export default function OpengraphImage() {
           }}
         >
           <div style={{ display: 'flex', color: '#4C6FFF', fontWeight: 700 }}>Free</div>
-          <div style={{ display: 'flex' }}>·  Open source  ·  No cloud  ·  No account  ·  ~8.6 MB</div>
+          <div style={{ display: 'flex' }}>·  Open source  ·  No cloud  ·  No account  ·  ~9 MB</div>
         </div>
       </div>
     ),

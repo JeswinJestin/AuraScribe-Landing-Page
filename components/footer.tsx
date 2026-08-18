@@ -93,7 +93,7 @@ export function Footer() {
             <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-faint">Requirements</p>
             <ul className="mt-5 space-y-3 text-[15px] text-muted">
               <li>Windows 10 or 11, 64-bit</li>
-              <li>~8.6 MB installer</li>
+              <li>~9 MB installer</li>
               <li>A microphone</li>
               <li>No account, no internet after setup</li>
             </ul>

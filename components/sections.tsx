@@ -18,7 +18,7 @@ const CREDITS = [
   { name: 'IndicConformer', by: 'AI4Bharat', role: 'Malayalam and Kannada' },
   { name: 'sherpa-onnx', by: 'k2-fsa', role: 'On-device inference runtime' },
   { name: 'ONNX Runtime', by: 'Microsoft', role: 'Model execution' },
-  { name: 'Tauri', by: 'Tauri contributors', role: 'The 8.6 MB application shell' },
+  { name: 'Tauri', by: 'Tauri contributors', role: 'The 9 MB application shell' },
 ]
 
 export function PoweredBy() {

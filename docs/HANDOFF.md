@@ -4,7 +4,15 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-18 (favicon re-verified LIVE + hardened to 7 sizes; the Google blank-globe is refetch latency, not a bug — see the 2026-08-18 note) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-18 (favicon hardened to 7 sizes; copy pass: installer size 8.6→9 MB, new "macOS/Linux beta" FAQ, em-dash removed from contact mailto subject; hero headline kept) · **Owner:** Jeswin Thomas Jestin
+
+**2026-08-18 — copy pass (owner audit).** Audited flow + copy for em-dashes and accuracy. Findings:
+the visible copy was already essentially em-dash-free (the search hits were code comments); the one
+real spot was the contact form's mailto subject, now a colon. Updated the installer size **8.6 MB →
+9 MB** everywhere (hero, footer, FAQ, OG image, JSON-LD `fileSize`, Tauri credit, blog, SEO doc).
+Added an honest **"Is there a macOS or Linux version?"** FAQ (Windows fully supported; macOS/Linux in
+beta on GitHub releases, Accessibility grant on macOS, X11 on Linux). Hero headline **"Dictate
+anywhere. Nothing leaves your machine."** kept (owner's choice — it's strong). `tsc` clean.
 
 **2026-08-18 — favicon is NOT broken; it's Google latency.** Verified the live
 `https://www.aurascribe.dev/favicon.ico` returns **200, image/x-icon, 16/32/48** — correct and

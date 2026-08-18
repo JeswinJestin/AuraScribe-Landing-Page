@@ -55,7 +55,7 @@ export function Contact() {
       } else {
         // No form endpoint configured: hand off to the user's mail client. We do NOT claim the
         // message was sent, because we cannot know the client opened or that they hit send.
-        const subject = encodeURIComponent(`AuraScribe — message from ${values.name}`)
+        const subject = encodeURIComponent(`AuraScribe: message from ${values.name}`)
         const bodyText = encodeURIComponent(`${values.message}\n\nFrom: ${values.name} <${values.email}>`)
         window.location.href = `mailto:${site.contactEmail}?subject=${subject}&body=${bodyText}`
         setStatus('idle')

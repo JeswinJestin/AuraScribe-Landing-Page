@@ -66,7 +66,7 @@ export default function Page() {
       <h2>What you need</h2>
       <p>
         AuraScribe runs on Windows 10 and 11, sixty-four bit, and needs a microphone. The installer is
-        about 8.6 MB, and the app sits at roughly 40 MB of memory when idle. There is no account to
+        about 9 MB, and the app sits at roughly 40 MB of memory when idle. There is no account to
         create and no subscription. After the first model download, no internet connection is needed
         at all.
       </p>
