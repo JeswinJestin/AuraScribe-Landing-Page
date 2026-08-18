@@ -11,7 +11,8 @@
     NO user-generated HTML rendered anywhere, so the XSS surface that 'unsafe-inline' would matter
     for does not exist here.
   - `connect-src` allows docs.google.com so the contact form can POST to a Google Form when one is
-    configured (site.contactForm.formAction). Remove it if that integration is dropped.
+    configured (site.contactForm.formAction), and api.github.com so the download buttons can look up
+    the newest release's per-OS asset (components/download.tsx). Both are read/POST-only, no secrets.
   - Everything else is same-origin. next/font self-hosts the fonts at build time, so no external
     font host is needed.
 */
@@ -27,7 +28,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
-  "connect-src 'self' https://docs.google.com",
+  "connect-src 'self' https://docs.google.com https://api.github.com",
   "form-action 'self' https://docs.google.com",
   "frame-ancestors 'none'",
   "object-src 'none'",
