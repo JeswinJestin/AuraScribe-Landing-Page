@@ -4,7 +4,27 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-18 (favicon hardened to 7 sizes; copy pass: installer size 8.6→9 MB, new "macOS/Linux beta" FAQ, em-dash removed from contact mailto subject; hero headline kept) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-19 (cross-platform: whole site now says Windows + macOS + Linux; platform-aware download buttons that resolve each OS's latest-release asset; per-OS "How it works" + setup; CSP allows api.github.com) · **Owner:** Jeswin Thomas Jestin
+
+**2026-08-19 — cross-platform launch (app shipped v2.0.0, Win/Mac/Linux).** The app is no longer
+Windows-only, so the site was updated to match, accurately (macOS/Linux presented as real but new):
+- **New `components/download.tsx`** — client component. On mount it hits the GitHub Releases API once
+  (`site.ghRepo`) and maps each OS to its asset (`.exe`/`.dmg`/`.deb`), so buttons deep-link to the
+  latest release's per-OS installer and never go stale. Falls back to the Releases page (JS-off, API
+  rate-limit, or before a release is published). `DownloadButtons` (hero/invitation: primary
+  "Download for <detected OS>" + explicit links for the other two) and `DownloadButton` (compact:
+  nav, footer, page-shell).
+- **`next.config.mjs` CSP** — added `https://api.github.com` to `connect-src` (the fetch above was
+  blocked otherwise; caught on the live site). Verified live: fetch 200, Windows deep-links to its
+  installer, macOS/Linux fall back until v2.0.0 is published.
+- **`components/sections.tsx` How it works** — per-OS hotkey (Cmd+Shift+Space on Mac) + a "Setting up
+  on each platform" note (Windows / macOS Privacy+Accessibility / Linux X11).
+- **Copy/SEO** — `lib/site.ts` (tagline, descriptions, keywords, FAQ), `app/layout.tsx` (titles, OG,
+  JSON-LD `operatingSystem`/`featureList`, version 2.0.0), about page, and blog CTAs all now say
+  Windows + macOS + Linux (the Windows-specific blog article kept its focus). `tsc` + `next build` clean.
+- **NOTE for next session:** the macOS/Linux direct downloads only light up once the **v2.0.0 GitHub
+  release is published** (the API hides drafts). Until then those buttons fall back to the releases
+  page and Windows resolves to the latest published tag.
 
 **2026-08-18 — copy pass (owner audit).** Audited flow + copy for em-dashes and accuracy. Findings:
 the visible copy was already essentially em-dash-free (the search hits were code comments); the one
