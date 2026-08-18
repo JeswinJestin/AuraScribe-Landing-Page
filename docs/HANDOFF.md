@@ -4,7 +4,18 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-14 (LIVE at www.aurascribe.dev; favicon.ico + brand schema fix; SEO launch checklist) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-18 (favicon re-verified LIVE + hardened to 7 sizes; the Google blank-globe is refetch latency, not a bug — see the 2026-08-18 note) · **Owner:** Jeswin Thomas Jestin
+
+**2026-08-18 — favicon is NOT broken; it's Google latency.** Verified the live
+`https://www.aurascribe.dev/favicon.ico` returns **200, image/x-icon, 16/32/48** — correct and
+deployed since the 2026-08-14 push. So the blank globe in Google results is **Google's own
+favicon-refresh schedule** (days–weeks after crawl), which no file change can speed up. Action, not
+code: in **Google Search Console → URL Inspection → Request Indexing** for the homepage to trigger a
+re-crawl (then Google refetches the favicon on its schedule). See `docs/SEO-LAUNCH-CHECKLIST.md`.
+Belt-and-suspenders: regenerated `app/favicon.ico` from the 512px `app/icon.png` to **7 sizes
+(16/32/48/64/96/128/256)** via Pillow, so it covers every browser/Google size heuristic and can't
+regress to a too-small icon. **Uncommitted — needs a normal commit + Vercel deploy to go live; it is
+an enhancement, the existing 3-size icon already satisfied Google's ≥48px rule.**
 
 **DEPLOYED (2026-08-14):** the site is live at **https://www.aurascribe.dev** (owner bought the `.dev`
 domain; apex 308-redirects to `www`, which is canonical — verified on the live site). So `site.url`
