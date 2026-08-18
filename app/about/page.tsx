@@ -6,11 +6,11 @@ import { engines, site } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Why AuraScribe exists: a free, open-source, 100% offline voice dictation app for Windows, built so your voice never has to leave your machine.',
+    'Why AuraScribe exists: a free, open-source, 100% offline voice dictation app for Windows, macOS and Linux, built so your voice never has to leave your machine.',
   alternates: { canonical: '/about' },
   openGraph: {
     title: 'About AuraScribe',
-    description: 'The story behind a free, open-source, fully offline dictation app for Windows.',
+    description: 'The story behind a free, open-source, fully offline dictation app for Windows, macOS and Linux.',
     url: `${site.url}/about`,
   },
 }
@@ -20,7 +20,7 @@ export default function AboutPage() {
     <PageShell
       eyebrow="About"
       title="Your voice, your machine."
-      intro="AuraScribe is a free, open-source dictation app for Windows. You press a hotkey, speak, and clean text appears wherever your cursor is. Every word is transcribed on your own computer, and it stays there."
+      intro="AuraScribe is a free, open-source dictation app for Windows, macOS, and Linux. You press a hotkey, speak, and clean text appears wherever your cursor is. Every word is transcribed on your own computer, and it stays there."
     >
       <h2>Why it exists</h2>
       <p>
@@ -105,13 +105,14 @@ export default function AboutPage() {
         offline tool does not have to start from nothing.
       </p>
 
-      <h2>What it is not, yet</h2>
+      <h2>Where it runs, and what it is not</h2>
       <p>
-        AuraScribe runs on Windows 10 and 11 today. macOS and Linux are planned and honestly not
-        built yet, so rather than fake support the app returns clear errors on those platforms until
-        the real thing ships. It is a focused dictation tool, not a meeting transcriber, not a chat
-        assistant, and it will never grow a cloud option or a subscription. If those limits are the
-        price of software that keeps your voice on your own machine, they are the right ones.
+        Windows 10 and 11 is the fully supported, verified platform. As of version 2.0, macOS
+        (Apple Silicon) and Linux (Debian and Ubuntu) preview builds are on the releases page too:
+        they install, launch, and dictate, and they are early, so feedback is welcome. Beyond that,
+        AuraScribe is a focused dictation tool, not a meeting transcriber, not a chat assistant, and
+        it will never grow a cloud option or a subscription. If those limits are the price of
+        software that keeps your voice on your own machine, they are the right ones.
       </p>
 
       <h2>Jeswin Thomas Jestin, the maker</h2>
@@ -120,7 +121,7 @@ export default function AboutPage() {
         work spans the whole stack: the local-first architecture, the four on-device speech engines
         (Moonshine, NVIDIA Parakeet, Dolphin, and AI4Bharat&rsquo;s IndicConformer), the on-device
         cleanup pipeline that turns raw speech into clean text, the personal dictionary and snippets,
-        and the Windows text injection that types into any application.
+        and the text injection that types into any application across Windows, macOS, and Linux.
       </p>
       <p>
         Reaching genuinely good offline Malayalam was the hardest part, and it produced something

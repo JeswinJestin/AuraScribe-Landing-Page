@@ -59,10 +59,10 @@ export default function Page() {
       <p>
         Being honest matters more than winning a comparison. If you want a polished team product with
         support, cross-device sync, and a company behind it, a paid cloud tool is a reasonable choice.
-        AuraScribe is a focused, single-purpose Windows app maintained in the open. It does dictation
-        very well and deliberately does not try to be a suite. It is also Windows only today; macOS
-        and Linux are planned but not built yet, and the app is honest about that rather than
-        pretending.
+        AuraScribe is a focused, single-purpose app maintained in the open. It does dictation
+        very well and deliberately does not try to be a suite. Windows is the fully supported
+        platform; macOS (Apple Silicon) and Linux preview builds are available too, still early and
+        looking for feedback.
       </p>
 
       <h2>The short version</h2>

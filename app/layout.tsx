@@ -22,7 +22,7 @@ const sans = Figtree({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'AuraScribe — offline voice dictation for Windows, free and open source',
+    default: 'AuraScribe — offline voice dictation for Windows, macOS & Linux, free and open source',
     template: '%s · AuraScribe',
   },
   description: site.metaDescription,
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: site.url,
-    title: 'AuraScribe — offline voice dictation for Windows',
+    title: 'AuraScribe — offline voice dictation for Windows, macOS & Linux',
     description: site.description,
     siteName: 'AuraScribe',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AuraScribe — offline voice dictation for Windows',
+    title: 'AuraScribe — offline voice dictation for Windows, macOS & Linux',
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -60,7 +60,7 @@ const jsonLd = {
       name: site.author.name,
       url: site.author.linkedin || site.author.githubProfile,
       description:
-        'Creator and maintainer of AuraScribe, a free, open-source, offline voice dictation app for Windows.',
+        'Creator and maintainer of AuraScribe, a free, open-source, offline voice dictation app for Windows, macOS, and Linux.',
       sameAs: authorSameAs,
     },
     {
@@ -72,18 +72,19 @@ const jsonLd = {
       alternateName: ['Aura Scribe', 'aurascribe', 'Aura Scribe app'],
       applicationCategory: 'UtilitiesApplication',
       applicationSubCategory: 'Voice dictation',
-      operatingSystem: 'Windows 10, Windows 11',
+      operatingSystem: 'Windows 10, Windows 11, macOS, Linux',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       description: site.description,
       url: site.url,
       downloadUrl: site.releases,
-      softwareVersion: '1.0.0',
-      fileSize: '9 MB',
+      softwareVersion: '2.0.0',
+      fileSize: '8 MB',
       license: 'https://opensource.org/licenses/MIT',
       isAccessibleForFree: true,
       featureList: [
         '100% offline, on-device speech recognition',
-        'Types into any Windows application',
+        'Cross-platform: Windows, macOS and Linux',
+        'Types into any application',
         'English, 25 European and ~40 Asian languages, Malayalam and Kannada',
         'Automatic punctuation, casing and filler-word cleanup',
         'No account, no subscription, no cloud',

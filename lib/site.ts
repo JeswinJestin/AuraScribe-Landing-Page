@@ -13,14 +13,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'https:
 
 export const site = {
   name: 'AuraScribe',
-  tagline: 'Free, offline voice dictation for Windows.',
+  tagline: 'Free, offline voice dictation for Windows, macOS, and Linux.',
   // Long description — used for OG/Twitter and the JSON-LD, where length is not penalised.
   description:
-    'AuraScribe is a free, open-source, 100% offline voice dictation app for Windows. Press a hotkey, speak, and clean text appears in any app. A private, local alternative to Wispr Flow, Superwhisper, and Dragon. No cloud, no account, no subscription.',
+    'AuraScribe is a free, open-source, 100% offline voice dictation app for Windows, macOS, and Linux. Press a hotkey, speak, and clean text appears in any app. A private, local alternative to Wispr Flow, Superwhisper, and Dragon. No cloud, no account, no subscription.',
   // Short description for the <meta name="description"> tag — kept within the 160-char limit search
-  // engines display, so it is never truncated (the full one above is 248 chars).
+  // engines display, so it is never truncated.
   metaDescription:
-    'Free, open-source, 100% offline voice dictation for Windows, and a private alternative to Wispr Flow. Press a hotkey, speak, and clean text appears in any app.',
+    'Free, open-source, 100% offline voice dictation for Windows, macOS & Linux, and a private alternative to Wispr Flow. Press a hotkey, speak, and clean text appears in any app.',
   url: siteUrl,
   github: 'https://github.com/JeswinJestin/AuraScribe',
   releases: 'https://github.com/JeswinJestin/AuraScribe/releases/latest',
@@ -46,6 +46,11 @@ export const site = {
     'voice dictation',
     'speech to text',
     'offline dictation Windows',
+    'offline dictation Mac',
+    'offline dictation Linux',
+    'cross-platform dictation',
+    'voice dictation macOS',
+    'voice dictation Linux',
     'offline speech to text',
     'local speech recognition',
     'on-device dictation',
@@ -106,7 +111,7 @@ export const faqs = [
   },
   {
     q: 'What are the system requirements?',
-    a: 'Windows 10 or 11 (64-bit) and a microphone. The installer is about 9 MB and runs faster than real time on an ordinary CPU. No internet is needed after the first model download.',
+    a: 'Windows 10 or 11 (64-bit) and a microphone. The Windows installer is about 8 MB and runs faster than real time on an ordinary CPU. macOS (Apple Silicon) and Linux (Debian/Ubuntu) preview builds are also available. No internet is needed after the first model download.',
   },
   {
     q: 'Is there a macOS or Linux version?',
