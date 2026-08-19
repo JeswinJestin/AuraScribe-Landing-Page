@@ -21,6 +21,33 @@ export type BlogPost = {
 // Newest first — the index renders them in this order.
 export const posts: BlogPost[] = [
   {
+    slug: 'best-free-offline-dictation-cross-platform',
+    title: 'The best free offline dictation app for Windows, macOS, and Linux',
+    description:
+      'Most dictation tools are paid, cloud-based, or single-platform. AuraScribe is free, open source, and 100% offline on all three, a private alternative to Wispr Flow, Superwhisper, and Dragon.',
+    date: '2026-08-19',
+    readingMinutes: 6,
+    tags: ['free dictation', 'cross-platform', 'Wispr Flow alternative'],
+  },
+  {
+    slug: 'aurascribe-mac-dictation',
+    title: 'AuraScribe on macOS: free offline voice dictation for Apple Silicon',
+    description:
+      'How to run AuraScribe, a free and open-source offline dictation app, on an Apple Silicon Mac: install it, grant the Accessibility permission, set the hotkey, and dictate into any app with nothing sent to the cloud.',
+    date: '2026-08-19',
+    readingMinutes: 6,
+    tags: ['macOS dictation', 'Apple Silicon', 'offline speech to text'],
+  },
+  {
+    slug: 'aurascribe-linux-dictation',
+    title: 'AuraScribe on Linux: offline dictation for Debian and Ubuntu',
+    description:
+      'Set up AuraScribe, a free open-source offline dictation app, on Debian or Ubuntu: install the .deb, use an X11 session for the global hotkey, and type clean text into any app, fully offline.',
+    date: '2026-08-19',
+    readingMinutes: 6,
+    tags: ['Linux dictation', 'Debian and Ubuntu', 'offline speech to text'],
+  },
+  {
     slug: 'offline-dictation-windows',
     title: 'Offline dictation on Windows: how on-device speech to text works',
     description:
