@@ -5,7 +5,7 @@ import { site } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
-    'The terms for using AuraScribe, a free and open-source Windows dictation app released under the MIT License and provided as is.',
+    'The terms for using AuraScribe, a free and open-source dictation app for Windows, macOS and Linux, released under the MIT License and provided as is.',
   alternates: { canonical: '/terms' },
   openGraph: {
     title: 'Terms of Service · AuraScribe',
@@ -24,7 +24,7 @@ export default function TermsPage() {
     >
       <h2>Using AuraScribe</h2>
       <p>
-        AuraScribe is a dictation application for Windows, offered free of charge with no account and
+        AuraScribe is a dictation application for Windows, macOS, and Linux, offered free of charge with no account and
         no subscription. By downloading, installing, or using it, you agree to these terms. If you do
         not agree, please do not install or use the app. You may use it for any lawful purpose,
         personal or commercial.

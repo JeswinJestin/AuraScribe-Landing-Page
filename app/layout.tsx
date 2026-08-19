@@ -69,7 +69,7 @@ const jsonLd = {
       name: 'AuraScribe',
       // Spelling variants people search for, so Google resolves them all to THIS entity and stops
       // conflating it with the unrelated "Aura AI Scribe" (medical) / "auraScribe.co" (meeting notes).
-      alternateName: ['Aura Scribe', 'aurascribe', 'Aura Scribe app'],
+      alternateName: ['Aura Scribe', 'aurascribe', 'Aurascribe', 'aura scribe', 'Aura Scribe app', 'AuraScribe app'],
       applicationCategory: 'UtilitiesApplication',
       applicationSubCategory: 'Voice dictation',
       operatingSystem: 'Windows 10, Windows 11, macOS, Linux',
@@ -78,7 +78,7 @@ const jsonLd = {
       url: site.url,
       downloadUrl: site.releases,
       softwareVersion: '2.0.0',
-      fileSize: '8 MB',
+      fileSize: '9 MB',
       license: 'https://opensource.org/licenses/MIT',
       isAccessibleForFree: true,
       featureList: [
@@ -96,7 +96,7 @@ const jsonLd = {
       '@id': `${site.url}/#website`,
       url: site.url,
       name: 'AuraScribe',
-      alternateName: ['Aura Scribe', 'aurascribe'],
+      alternateName: ['Aura Scribe', 'aurascribe', 'Aurascribe', 'aura scribe'],
       description: site.description,
       publisher: { '@id': `${site.url}/#jeswin` },
     },
