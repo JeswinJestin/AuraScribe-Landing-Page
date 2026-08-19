@@ -1,20 +1,25 @@
 # AuraScribe — landing page
 
 The marketing website for **[AuraScribe](https://github.com/JeswinJestin/AuraScribe)**, the free,
-open-source, 100% offline voice-dictation app for Windows. Live at **[aurascribe.dev](https://www.aurascribe.dev)**.
+open-source, 100% offline voice dictation and voice typing app for **Windows, macOS, and Linux**.
+Live at **[aurascribe.dev](https://www.aurascribe.dev)**.
 
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=nextdotjs)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3-38bdf8?logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Deploy](https://img.shields.io/badge/deploy-Vercel-black?logo=vercel)
 
+**Topics:** `voice-dictation` · `speech-to-text` · `voice-typing` · `offline` · `on-device` ·
+`open-source` · `wispr-flow-alternative` · `dictation-app` · `windows` · `macos` · `linux`
+
 ## 📖 About
 
 This repository is **only the website** — the AuraScribe app itself lives in a
 [separate repo](https://github.com/JeswinJestin/AuraScribe). The site exists to explain what
-AuraScribe is (private, local, free voice dictation), and to rank for the searches people actually
-use: *"free Wispr Flow alternative"*, *"offline dictation for Windows"*, *"on-device Malayalam speech
-to text"*, and similar.
+AuraScribe is (private, local, free voice dictation and voice typing), and to rank for the searches
+people actually use: *"free Wispr Flow alternative"*, *"free dictation tool for Windows, Mac and
+Linux"*, *"open-source voice typing"*, *"offline dictation"*, and *"on-device Malayalam speech to
+text"*.
 
 It is a single-page scrolling story plus a small set of content pages (About, Blog, Privacy, Terms),
 built with an editorial **"cream broadsheet / dark velvet chamber"** design that shifts colour as you
@@ -28,7 +33,8 @@ scroll. Everything is static and self-hosted — no trackers, no cookies, no thi
   Asian, Malayalam, Kannada), each with a live example, on a timer you can click to control.
 - 🎨 **Two-typeface editorial system** — EB Garamond display serif + Figtree UI, one indigo accent,
   flat 2px borders, no shadows or gradients.
-- 📝 **Blog** — five SEO long-tail posts with `BlogPosting` structured data.
+- 📝 **Blog** — eight SEO long-tail posts (Windows, macOS, Linux, comparisons) with `BlogPosting`
+  structured data.
 - 🔍 **Production SEO** — canonical URLs, sitemap, robots, Open Graph + Twitter cards, a real
   `next/og` social image, and `SoftwareApplication` / `WebSite` / `FAQPage` / `Person` JSON-LD.
 - 🔒 **Hardened** — Content-Security-Policy, HSTS, `X-Content-Type-Options`, `X-Frame-Options`,

@@ -4,7 +4,85 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-19 (cross-platform: whole site now says Windows + macOS + Linux; platform-aware download buttons that resolve each OS's latest-release asset; per-OS "How it works" + setup; CSP allows api.github.com) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-08-19 (round 3) (language wheel alignment/timing fixed; footer requirements now cross-platform; brand-name spelling/case variants added for search; 3 new cross-platform blog posts; downloads resolve via `/releases/latest`; hero fits ONE viewport with full-size type; three-platform download chips; new `docs/BACKLINKS.md`) · **Owner:** Jeswin Thomas Jestin
+
+**2026-08-19 (round 3) — language wheel alignment/timing, footer requirements, brand keywords, 3 blog posts, mobile/responsive hero, detectOS, README.**
+- **Mobile default download = Windows (`components/download.tsx` `detectOS`).** AuraScribe is a
+  DESKTOP app; on a phone the device OS is meaningless for the download (Android read as "linux",
+  iPhone as "mac"), so `detectOS` now returns `windows` for any mobile UA
+  (`android|iphone|ipad|ipod|mobile|windows phone`) and only auto-detects on real desktops
+  (Mac→macos, Linux→linux). The per-OS chips still let a mobile visitor grab the Mac/Linux build.
+  Verified live with an Android UA: primary reads "Download for Windows".
+- **Responsive hero (`components/story.tsx` + `download.tsx`).** On tight screens the hero is
+  top-aligned with a real gap under the nav pill (was crowding the eyebrow); `justify-start pt-12
+  pb-16` on mobile, `md:justify-center md:pt-0 md:pb-[5vh]` keeps the tuned desktop fit. The two CTA
+  buttons ("Download for <OS>" + "View on GitHub") now stack FULL-WIDTH and equal-sized on phones
+  (`w-full` in a `max-w-sm` column) and sit side-by-side at natural width from `sm` up. Verified:
+  375px = 48px nav gap + equal 327px buttons, no horizontal overflow; 1200px = side-by-side, fits.
+- **README refreshed** — was "for Windows" (stale) → cross-platform, blog count 5→8, target-keyword
+  phrases + a Topics line. `docs/BACKLINKS.md` is intentionally NOT committed (owner's call).
+
+- **Language wheel looked misaligned (owner). Root cause found + fixed (`components/option-wheel.tsx`).**
+  `rowH` (row spacing) was `fontSize * spacing * remPx` using the raw `fontSize` PROP (always 3rem),
+  but glyphs render at `clamp(2rem, 6.5vw, 3rem)`. Below ~740px wide the rows kept a 3rem rhythm while
+  the letters shrank, so the wheel spaced out and looked wrong (verified: at 500px the old ratio was
+  **2.07× the glyph height**; now **1.32×**, matching desktop). Fix: `rowH` is derived from the
+  effective clamped glyph size (`effFontPx = min(max(2rem, 6.5vw), fontSize)`), and a `vw` state +
+  resize listener keep it correct on resize. Also added a subtle centre `scale` (1 → 0.84) for depth,
+  and in `language-wheel.tsx` calmed the arc (tilt 7→4, curve 0.6, spacing 1.4→1.32) and the timing
+  (smoothing 260→200, STEP_MS 2600→3000). NOTE: the wheel's rAF layout can't be screenshot-verified in
+  the headless preview pane (it pauses when the pane isn't compositing); geometry was verified by
+  replicating the layout math live at 1440px and 500px. `tsc` + `build` + design-detector all clean.
+- **Footer "Requirements" was Windows-only** ("Windows 10 or 11, 64-bit / ~9 MB installer") →
+  now cross-platform: Windows 10/11 (64-bit), macOS on Apple Silicon, Linux Debian/Ubuntu (X11), a
+  microphone + any CPU, no account / offline after setup (`components/footer.tsx`).
+- **Brand-name variants for search (`lib/site.ts` keywords + `app/layout.tsx` JSON-LD alternateName).**
+  Added casing + spelling variants (aurascribe, Aurascribe, AURASCRIBE, "aura scribe", "Aura Scribe",
+  AuraScribe app, AuraScribe Windows/Mac/Linux, etc.). NOTE for future self: meta-keyword casing is
+  irrelevant to Google (case-insensitive) — the variant that actually matters is the SPELLING split
+  ("Aura Scribe" two words vs "AuraScribe"), which is why those also went into the SoftwareApplication
+  and WebSite `alternateName` (Google DOES use alternateName for entity disambiguation).
+- **3 new blog posts** (`lib/blog.ts` + `app/blog/<slug>/page.tsx`), all cross-platform, em-dash-free,
+  real crawlable JSX, auto-added to index + sitemap: `best-free-offline-dictation-cross-platform`,
+  `aurascribe-mac-dictation` (Apple Silicon setup: Privacy&Security + Accessibility + Cmd hotkey),
+  `aurascribe-linux-dictation` (.deb + X11 session). Blog is now 8 posts; build shows all 8 routes.
+
+**2026-08-19 (round 2) — hero fit + non-congestive cross-platform downloads + SEO.**
+- **Hero fits the first frame now, AND the composition was rebuilt for craft (owner: "you shrank the
+  heading, it doesn't feel cohesive").** Root cause of the clipping was the `sticky` nav pill
+  (`nav.tsx`) reserving 76px at the top while the hero still claimed a full `min-h-[100dvh]` below it,
+  so nav + hero always exceeded one screen. Fix: hero is `min-h-[calc(100dvh-76px)]` (76px = pt-5 20px
+  + pill h-14 56px) in `components/story.tsx`. The FIT is solved by layout, not by shrinking type: the
+  H1 is a big editorial `clamp(44px, min(10vw, 10.8vh), 96px)` (full 96px / 6rem on desktop, only
+  short viewports scale it down so it never clips), the sub-headline was cut to two tight sentences so
+  it supports rather than competes, and `pb-[5vh]` biases the centred stack a little higher (owner
+  asked to "bring it more top"). Verified live it fits at 1440×900, 1366×680, 1280×620 (floor ~620px),
+  10px gap under the nav, console clean. Impeccable craft-floor honoured (display ≤6rem; committed
+  editorial world preserved).
+- **Three-platform download, refined (`components/download.tsx`) — owner picked "auto-detect primary +
+  3 chips".** Big "Download for <detected OS>" primary (deep-links to the latest release's installer)
+  + "View on GitHub", then a row of three legible pill chips (Windows/macOS/Linux), each a real per-OS
+  installer link. Chips use the site's flat **2px** border system; the chip matching the visitor's OS
+  is tinted `bg-accent/[0.08]` + accent border/text so it reads as one decision with the primary
+  button, the other two are `text-muted` (NOT the old faint `text-faint` dotted line the owner flagged
+  as too low-opacity). `DownloadButton` (compact nav/footer) is unchanged.
+- **Downloads now resolve to GitHub's canonical `/releases/latest` (`components/download.tsx`).** Was
+  `/releases?per_page=10` + `find(!draft)`, which would have grabbed a *prerelease* if one were
+  published later and could disagree with the `releases/latest` fallback page. Now it fetches
+  `/releases/latest` (excludes drafts AND prereleases) and maps `.exe`/`.dmg`/`.deb` to each OS, so the
+  direct links and the fallback can never diverge and future releases are tracked automatically.
+  **v2.0.0 is now PUBLISHED** (no longer a draft): verified live that all three buttons resolve to the
+  real assets — `AuraScribe_2.0.0_x64-setup.exe` (9.1 MB), `_aarch64.dmg` (25.7 MB), `_amd64.deb`
+  (7.2 MB) — and each URL serves the file (HTTP 206 on a range probe), so a click downloads the right
+  installer per OS. The earlier "macOS/Linux light up once v2.0.0 is published" caveat is now RESOLVED.
+- **Copy/SEO:** `lib/site.ts` keywords gained Mac/Linux + cross-platform + comparison phrasings; the
+  "system requirements" FAQ is now OS-neutral and says ~9 MB; `app/terms/page.tsx` no longer calls the
+  app "for Windows" (now Windows/macOS/Linux). Fixed the 8→9 MB drift in the FAQ and `layout.tsx`
+  JSON-LD `fileSize` (HANDOFF had already standardized on 9 MB). `tsc` + `next build` clean.
+- **NEW `docs/BACKLINKS.md`** — concrete free/high-quality backlink playbook (the audit said "no
+  backlinks"): tiered list (GitHub README, Product Hunt, AlternativeTo, Show HN, awesome-lists,
+  directories, dev.to/Medium, outreach), the "keep it safe" rules, and a tracker table. Owner action;
+  cannot be coded.
 
 **2026-08-19 — cross-platform launch (app shipped v2.0.0, Win/Mac/Linux).** The app is no longer
 Windows-only, so the site was updated to match, accurately (macOS/Linux presented as real but new):
@@ -323,8 +401,9 @@ Both are cosmetic/edge and were intentionally deferred.
    existing one), done (sitemap + index pick it up automatically).
 
 **C. Off-page SEO (owner actions, cannot be coded):**
-8. Backlinks: Product Hunt launch, alternativeto.net (as a Wispr Flow/Dragon alternative), awesome-lists
-   (awesome-privacy, awesome-windows), a "Show HN", relevant subreddits, the app README linking here.
+8. Backlinks: **see `docs/BACKLINKS.md`** for the full tiered playbook + tracker (Product Hunt,
+   alternativeto.net as a Wispr Flow/Dragon alternative, awesome-lists, Show HN, directories, dev.to,
+   outreach, and the app README linking here). Build a dozen good links over weeks, not all at once.
 
 **D. Deploy:**
 9. **GitHub repo exists:** `https://github.com/JeswinJestin/AuraScribe-Landing-Page.git` (owner
