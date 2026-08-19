@@ -76,17 +76,31 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
   const dragMovedRef = useRef(false)
   const [selectedIndex, setSelectedIndex] = useState(defaultSelected)
   const [isDragging, setIsDragging] = useState(false)
+  const [vw, setVw] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1024))
+
+  // Keep the row spacing correct when the viewport width changes (the glyph size is vw-based).
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const onResize = () => setVw(window.innerWidth)
+    window.addEventListener('resize', onResize, { passive: true })
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   const remPx =
     typeof window !== 'undefined'
       ? parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
       : 16
+  // The glyphs render at CSS `clamp(2rem, 6.5vw, fontSize rem)`, so the ROW SPACING must be derived
+  // from that same effective size, NOT from the raw `fontSize` prop. Otherwise the rows keep a
+  // 3rem rhythm while the letters shrink with the viewport, and the wheel spaces out and looks
+  // misaligned on anything below ~740px wide (the documented bug). This mirrors the clamp exactly.
+  const effFontPx = Math.min(Math.max(2 * remPx, 0.065 * vw), fontSize * remPx)
 
   onChangeRef.current = onChange
   cfgRef.current = {
     count: items.length,
     items,
-    rowH: Math.max(fontSize * spacing * remPx, 1),
+    rowH: Math.max(effFontPx * spacing, 1),
     curve,
     tilt,
     blur,
@@ -134,7 +148,9 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
         x = -mirror * R * (1 - Math.cos(ang)) * cfg.curve
         rot = (mirror * ang * 180) / Math.PI
       }
-      el.style.transform = `translate(${x.toFixed(2)}px, calc(${y.toFixed(2)}px - 50%)) rotate(${rot.toFixed(3)}deg)`
+      // A gentle scale toward the centre gives the wheel depth without the fanned, tilted look.
+      const scale = Math.max(0.84, 1 - dist * 0.055)
+      el.style.transform = `translate(${x.toFixed(2)}px, calc(${y.toFixed(2)}px - 50%)) rotate(${rot.toFixed(3)}deg) scale(${scale.toFixed(3)})`
       el.style.opacity = String(Math.max(cfg.minOpacity, 1 - dist * cfg.fade))
       el.style.filter = cfg.blur > 0 ? `blur(${(dist * cfg.blur).toFixed(2)}px)` : 'none'
       el.style.setProperty('--ow-p', Math.max(0, 1 - Math.min(dist, 1)).toFixed(4))
@@ -254,7 +270,7 @@ const OptionWheel = forwardRef<OptionWheelHandle, OptionWheelProps>(function Opt
 
   useEffect(() => {
     applyTarget(targetRef.current, false)
-  }, [items, fontSize, spacing, curve, tilt, blur, fade, minOpacity, side, loop, smoothing, applyTarget])
+  }, [items, fontSize, spacing, curve, tilt, blur, fade, minOpacity, side, loop, smoothing, vw, applyTarget])
 
   useEffect(
     () => () => {

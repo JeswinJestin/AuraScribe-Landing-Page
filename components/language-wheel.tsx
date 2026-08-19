@@ -28,7 +28,7 @@ const LANGS: Lang[] = [
 ]
 const LABELS = LANGS.map((l) => l.label) // stable reference — do not inline into JSX
 const MIDDLE = 2
-const STEP_MS = 2600 // dwell time per language
+const STEP_MS = 3000 // dwell time per language (long enough to actually read each one)
 
 export function LanguageWheel() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -109,12 +109,13 @@ export function LanguageWheel() {
                 selectable
                 side="left"
                 fontSize={3}
-                spacing={1.4}
-                tilt={7}
+                spacing={1.32}
+                tilt={4}
+                curve={0.6}
                 blur={0}
-                fade={0.3}
-                minOpacity={0.14}
-                smoothing={260}
+                fade={0.34}
+                minOpacity={0.12}
+                smoothing={200}
                 inset={4}
                 onChange={onChange}
               />
