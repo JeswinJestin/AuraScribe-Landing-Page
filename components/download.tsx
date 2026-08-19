@@ -1,18 +1,17 @@
 'use client'
 
 /*
-  Platform-aware download. On mount we fetch the newest PUBLISHED GitHub release once and resolve
-  the exact asset for each OS (.exe / .dmg / .deb), so every button is a real anchor that goes
-  straight to that platform's installer for the latest release — no version numbers hardcoded here,
-  so it never goes stale. Before the fetch resolves (or if the API is rate-limited / a release is
-  still a draft), the href falls back to the Releases page, so a click always lands somewhere useful
-  and it works with JavaScript disabled.
-
-  Note: the GitHub API only returns PUBLISHED releases. The macOS/Linux direct links therefore
-  activate once the cross-platform release is published (a draft is invisible to the public API).
+  Platform-aware download. On mount we hit GitHub's canonical `/releases/latest` once and resolve the
+  exact asset for each OS (.exe / .dmg / .deb) from THAT release, so every button is a real anchor
+  that goes straight to the latest release's installer for that platform — no version hardcoded here,
+  so it tracks whatever you publish next automatically and never goes stale. `/releases/latest` is
+  the same release the "releases/latest" fallback page points to (it excludes drafts AND prereleases),
+  so the direct links and the fallback can never disagree. Before the fetch resolves (JS disabled,
+  API rate-limited, or no full release yet) the href falls back to that Releases page, so a click
+  always lands somewhere useful.
 */
 
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   DownloadSimple,
   GithubLogo,
@@ -38,30 +37,31 @@ function OsIcon({ os, size = 15 }: { os: OS; size?: number }) {
   return <LinuxLogo size={size} weight="fill" />
 }
 
-// Best-effort guess of the visitor's OS, for choosing the primary button. Runs after mount.
+// Best-effort guess of the visitor's DESKTOP OS, for choosing the primary button. Runs after mount.
 function detectOS(): OS {
   if (typeof navigator === 'undefined') return 'windows'
   const s = `${navigator.userAgent} ${navigator.platform}`.toLowerCase()
+  // AuraScribe is a desktop app. On a phone or tablet the device OS is meaningless for a desktop
+  // download (you cannot install a .deb/.dmg on Android or iOS), and Android would otherwise read
+  // as "linux". So on any mobile device default to Windows, the most common desktop, and let the
+  // per-OS chips below cover whoever is actually on a Mac or Linux desktop.
+  if (/android|iphone|ipad|ipod|mobile|windows phone/.test(s)) return 'windows'
   if (s.includes('mac')) return 'macos'
-  if (s.includes('linux') || s.includes('x11') || s.includes('android')) return 'linux'
+  if (s.includes('linux') || s.includes('x11')) return 'linux'
   return 'windows'
 }
 
-// Fetch the newest published release once and map each OS to its asset download URL.
+// Fetch the latest release once and map each OS to its asset download URL.
 function useReleaseAssets() {
   const [assets, setAssets] = useState<Partial<Record<OS, string>>>({})
   useEffect(() => {
     let alive = true
-    fetch(`https://api.github.com/repos/${site.ghRepo}/releases?per_page=10`, {
+    fetch(`https://api.github.com/repos/${site.ghRepo}/releases/latest`, {
       headers: { Accept: 'application/vnd.github+json' },
     })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((list: unknown) => {
-        if (!alive || !Array.isArray(list)) return
-        const rel = list.find((r: { draft?: boolean }) => !r?.draft) as
-          | { assets?: { name: string; browser_download_url: string }[] }
-          | undefined
-        if (!rel?.assets) return
+      .then((rel: { assets?: { name: string; browser_download_url: string }[] }) => {
+        if (!alive || !rel?.assets) return
         const next: Partial<Record<OS, string>> = {}
         for (const os of ALL) {
           const a = rel.assets.find((x) => ASSET_RE[os].test(x.name))
@@ -79,43 +79,63 @@ function useReleaseAssets() {
   return assets
 }
 
-/* ---------- Hero / invitation: full three-platform set ---------- */
+/* ---------- Hero / invitation: full three-platform set ----------
+   One obvious primary button for the visitor's own OS, then all three platforms as equal,
+   legible chips so macOS and Linux read as first-class downloads (not a faint afterthought)
+   and the whole block stays compact enough to sit inside the first viewport. */
 export function DownloadButtons({ caption }: { caption?: string }) {
   const assets = useReleaseAssets()
   const [os, setOs] = useState<OS>('windows')
   useEffect(() => setOs(detectOS()), [])
-  const others = ALL.filter((o) => o !== os)
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <a href={assets[os] ?? site.releases} target="_blank" rel="noreferrer" className="btn btn-primary">
+    <div className="flex w-full max-w-sm flex-col items-center gap-5 sm:w-auto sm:max-w-none">
+      {/* On phones the two buttons stack full-width so they are the SAME size and never look
+          lopsided; from sm up they sit side by side at their natural width. */}
+      <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
+        <a
+          href={assets[os] ?? site.releases}
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-primary w-full sm:w-auto"
+        >
           <DownloadSimple size={18} weight="bold" />
           Download for {LABEL[os]}
         </a>
-        <a href={site.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
+        <a href={site.github} target="_blank" rel="noreferrer" className="btn btn-ghost w-full sm:w-auto">
           <GithubLogo size={18} weight="fill" />
           View on GitHub
         </a>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[13px] text-faint">
-        <span>Also for</span>
-        {others.map((o, i) => (
-          <Fragment key={o}>
+      {/* Every platform is one tap away. The chip matching the visitor's OS is tinted to match
+          the primary button above, so the pair reads as one decision; the other two sit beside
+          it as equal, legible options rather than a faint afterthought. 2px borders keep them in
+          the same flat, hairline system as the rest of the page. */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5">
+        {ALL.map((o) => {
+          const active = o === os
+          return (
             <a
+              key={o}
               href={assets[o] ?? site.releases}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 underline decoration-dotted underline-offset-4 transition-colors hover:text-accent"
+              aria-label={`Download AuraScribe for ${LABEL[o]}`}
+              className={`inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-[14px] font-medium transition-colors ${
+                active
+                  ? 'border-accent/55 bg-accent/[0.08] text-accent'
+                  : 'border-line text-muted hover:border-accent/45 hover:text-ink'
+              }`}
             >
-              <OsIcon os={o} />
+              <OsIcon os={o} size={16} />
               {LABEL[o]}
             </a>
-            {i < others.length - 1 ? <span aria-hidden>·</span> : null}
-          </Fragment>
-        ))}
+          )
+        })}
       </div>
-      {caption ? <p className="font-mono text-[13px] text-faint">{caption}</p> : null}
+      <p className="font-mono text-[12px] tracking-wide text-faint">
+        {caption ?? 'Free forever · MIT licensed · no account, no cloud'}
+      </p>
     </div>
   )
 }
