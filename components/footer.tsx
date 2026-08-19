@@ -1,7 +1,6 @@
 import { GithubLogo, Heart, Coffee, LinkedinLogo, BehanceLogo } from '@phosphor-icons/react/dist/ssr'
 import { site } from '@/lib/site'
 import { Reveal } from './primitives'
-import { DownloadButton } from './download'
 
 /*
   Footer — the closing chamber. An oversized serif wordmark anchors it (the reference's
@@ -23,8 +22,13 @@ export function Footer() {
                 transcribed on your own machine, and it stays there.
               </p>
             </div>
+            {/* Download already lives in the nav (top) and the invitation section, so the footer
+                carries the other primary action instead of a third, OS-specific Download button. */}
             <div className="flex shrink-0 flex-wrap items-center gap-3">
-              <DownloadButton />
+              <a href={site.github} target="_blank" rel="noreferrer" className="btn btn-ghost">
+                <GithubLogo size={18} weight="fill" />
+                View on GitHub
+              </a>
             </div>
           </div>
         </Reveal>
@@ -90,10 +94,11 @@ export function Footer() {
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-faint">Requirements</p>
             <ul className="mt-5 space-y-3 text-[15px] text-muted">
-              <li>Windows 10 or 11, 64-bit</li>
-              <li>~9 MB installer</li>
-              <li>A microphone</li>
-              <li>No account, no internet after setup</li>
+              <li>Windows 10 or 11 (64-bit)</li>
+              <li>macOS on Apple Silicon</li>
+              <li>Linux: Debian or Ubuntu (X11)</li>
+              <li>A microphone, any ordinary CPU</li>
+              <li>No account, offline after setup</li>
             </ul>
           </div>
         </div>
