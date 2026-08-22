@@ -21,6 +21,19 @@
   375px = 48px nav gap + equal 327px buttons, no horizontal overflow; 1200px = side-by-side, fits.
 - **README refreshed** — was "for Windows" (stale) → cross-platform, blog count 5→8, target-keyword
   phrases + a Topics line. `docs/BACKLINKS.md` is intentionally NOT committed (owner's call).
+- **Favicon / web manifest (`app/manifest.ts` + `public/icon-192.png` + `public/icon-512.png`).**
+  The favicon was ALREADY served correctly (verified live: `/favicon.ico` 200, image/x-icon, 54KB
+  multi-size; homepage head links a 512 PNG too). Google not showing it in results is Google's own
+  favicon-refresh latency (days–weeks after crawl), NOT a bug. To maximise the chance and be
+  spec-compliant, added a web app manifest (Next serves `/manifest.webmanifest`, auto-linked in the
+  head) exposing 192 (a multiple of 48, which Google recommends) and 512 icons — Google reads the
+  manifest as a favicon source. NON-CODE action for the owner: GSC → URL Inspection on the homepage →
+  Request Indexing, then Google refetches the favicon on its schedule.
+- **GSC "Discovered — currently not indexed" is NOT a site error.** sitemap.ts already lists all 8
+  posts + pages and robots allows all; the pages return 200 and are internally linked. That status
+  means Google found the URLs but has not prioritised crawling them yet (normal for a new, low-backlink
+  domain). Levers: Request Indexing per URL in GSC, earn backlinks (see the uncommitted
+  `docs/BACKLINKS.md`), and time. No code fix needed.
 
 - **Language wheel looked misaligned (owner). Root cause found + fixed (`components/option-wheel.tsx`).**
   `rowH` (row spacing) was `fontSize * spacing * remPx` using the raw `fontSize` PROP (always 3rem),
