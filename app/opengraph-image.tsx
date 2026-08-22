@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 // Real social share card (1200x630), generated at build. Dark chamber + cream editorial type,
 // matching the site. No external fonts so it renders reliably offline.
 export const runtime = 'nodejs'
-export const alt = 'AuraScribe — free, offline voice dictation for Windows'
+export const alt = 'AuraScribe - free, offline voice dictation for Windows, macOS and Linux'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -46,7 +46,7 @@ export default function OpengraphImage() {
               maxWidth: 900,
             }}
           >
-            Free, open-source, 100% offline voice dictation for Windows.
+            Free, open-source, 100% offline voice dictation for Windows, macOS, and Linux.
           </div>
         </div>
 

@@ -22,7 +22,7 @@ const sans = Figtree({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: 'AuraScribe — offline voice dictation for Windows, macOS & Linux, free and open source',
+    default: 'AuraScribe - Free offline voice dictation for Windows, macOS and Linux, open source',
     template: '%s · AuraScribe',
   },
   description: site.metaDescription,
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: site.url,
-    title: 'AuraScribe — offline voice dictation for Windows, macOS & Linux',
+    title: 'AuraScribe - Free offline voice dictation for Windows, macOS and Linux, open source',
     description: site.description,
     siteName: 'AuraScribe',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AuraScribe — offline voice dictation for Windows, macOS & Linux',
+    title: 'AuraScribe - Free offline voice dictation for Windows, macOS and Linux, open source',
     description: site.description,
   },
   robots: { index: true, follow: true },
