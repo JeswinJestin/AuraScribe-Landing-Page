@@ -4,16 +4,36 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-10-21 (**v2.2.0 Notetaker announcement** — a dismissible announcement pill
-above the nav (`components/announce.tsx`), a full-width **Notetaker** feature cell at the top of the
-Features bento with a "New in v2.2.0" badge and an abstract indigo speaker-rows visual, and a new
-"Can it transcribe meetings?" FAQ. Design rules honored: one-accent indigo only (the badge/visual use
+**Last updated:** 2026-10-21 (**SEO: Notetaker + voice-typing blog cluster** — 4 new crawlable blog
+posts targeting the meeting-transcription / summariser / voice-typing searches, registered in
+`lib/blog.ts` so they auto-feed the index, sitemap and Article JSON-LD; the meeting/notetaker and
+voice-typing keyword clusters added to `lib/site.ts`; a "Can it summarise a meeting for free?" FAQ
+added (feeds FAQPage structured data). `npm run build` clean (28 pages), sitemap lists all 12 posts,
+verified live, no em-dashes in visible copy. **Prior same day — v2.2.0 Notetaker announcement:** a
+dismissible announcement pill above the nav (`components/announce.tsx`), a full-width **Notetaker**
+feature cell at the top of the Features bento with a "New in v2.2.0" badge and an abstract indigo
+speaker-rows visual, and a "Can it transcribe meetings?" FAQ. Design rules honored: one-accent indigo only (the badge/visual use
 indigo at varying opacity, and the cell is a plain card so the privacy cell stays the single accent
 chamber), no em-dashes, phosphor icons, theme tokens. `tsc` + `npm run build` clean, console clean,
 verified live. **Prior — 2026-08-19 (round 3):** language wheel alignment/timing fixed; footer
 requirements now cross-platform; brand-name spelling/case variants added for search; 3 new
 cross-platform blog posts; downloads resolve via `/releases/latest`; hero fits ONE viewport with
 full-size type; three-platform download chips; new `docs/BACKLINKS.md`) · **Owner:** Jeswin Thomas Jestin
+
+**2026-10-21 — SEO blog cluster for Notetaker + voice typing (4 posts + keywords + FAQ).**
+- **4 new posts** (bodies as crawlable JSX in `app/blog/<slug>/page.tsx`, metadata in `lib/blog.ts`,
+  newest-first so they lead the index): `free-open-source-meeting-notetaker` (vs cloud bots like
+  Otter/Fireflies), `free-meeting-transcription-offline`, `free-meeting-summary-on-device` (honest:
+  the summary is **extractive** key points + keywords, no model, cannot hallucinate; Windows only),
+  and `free-voice-typing-app` (cross-platform). All cross-link each other + home `#compare` + releases.
+- **`lib/site.ts`:** added the meeting/notetaker cluster (free meeting recording/transcription/
+  transcript/summariser, open source meeting notetaker, Otter/Fireflies alternative, etc.) and the
+  voice-typing cluster (open source voice typing app, free voice typing app/software) to `keywords`;
+  added a "Can it summarise a meeting for free?" FAQ.
+- Honesty held per CLAUDE.md: Notetaker/summary are stated as Windows-only; summary described as
+  extractive (not an LLM narrative); speaker names only when confident. No claim exceeds the code.
+- `npm run build` clean (28 static pages); built sitemap lists all 12 posts; rendered + verified in
+  the preview (blog index shows the 4 new entries at top; a post page renders with no console errors).
 
 **2026-10-21 — v2.2.0 Notetaker announcement (banner + feature cell + FAQ).**
 - **`components/announce.tsx`** (new, client): a dismissible glass pill above the nav, same width as

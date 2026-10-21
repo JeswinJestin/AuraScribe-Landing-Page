@@ -21,6 +21,42 @@ export type BlogPost = {
 // Newest first — the index renders them in this order.
 export const posts: BlogPost[] = [
   {
+    slug: 'free-open-source-meeting-notetaker',
+    title: 'A free, open-source meeting notetaker that runs on your machine',
+    description:
+      'Most meeting notetakers send a bot into your call and keep the recording in the cloud. AuraScribe records locally on Windows, tells each speaker apart, and fills in real names only when it is confident. Free and MIT-licensed.',
+    date: '2026-10-21',
+    readingMinutes: 6,
+    tags: ['meeting notetaker', 'free meeting recording', 'open source', 'local'],
+  },
+  {
+    slug: 'free-meeting-transcription-offline',
+    title: 'Free offline meeting transcription, with no cloud and no account',
+    description:
+      'AuraScribe’s Notetaker records the call audio you hear plus your microphone and writes a timestamped transcript on your own Windows PC. Free, open source, and fully local, with no bot joining the call.',
+    date: '2026-10-21',
+    readingMinutes: 6,
+    tags: ['meeting transcription', 'free meeting transcript', 'offline', 'Notetaker'],
+  },
+  {
+    slug: 'free-meeting-summary-on-device',
+    title: 'Free on-device meeting summaries: key points without the cloud',
+    description:
+      'How AuraScribe turns a meeting transcript into key points and topic keywords entirely on your own machine, using an extractive summary that cannot invent anything that was not said. Free, offline, no extra download.',
+    date: '2026-10-21',
+    readingMinutes: 5,
+    tags: ['meeting summary', 'free meeting summariser', 'on-device', 'extractive'],
+  },
+  {
+    slug: 'free-voice-typing-app',
+    title: 'Free voice typing for Windows, macOS, and Linux',
+    description:
+      'Voice typing means speaking instead of typing and having clean text appear in whatever app has your cursor. AuraScribe does it free, open source, and fully offline on all three platforms, with no subscription and no account.',
+    date: '2026-10-21',
+    readingMinutes: 5,
+    tags: ['voice typing', 'free voice typing', 'open source', 'cross-platform'],
+  },
+  {
     slug: 'best-free-offline-dictation-cross-platform',
     title: 'The best free offline dictation app for Windows, macOS, and Linux',
     description:

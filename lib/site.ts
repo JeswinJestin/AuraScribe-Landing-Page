@@ -132,6 +132,31 @@ export const site = {
     'type with your voice free',
     'voice to text app free',
     'cross-platform voice typing',
+    'open source voice typing app',
+    'free voice typing app',
+    'free voice typing software',
+    'offline voice typing',
+    // Notetaker / meeting cluster (new in v2.2.0). Describe only what the Notetaker actually does:
+    // local recording + transcription + speaker labels + extractive summary, Windows only for now.
+    'free meeting recording',
+    'free meeting transcription',
+    'free meeting transcript',
+    'free meeting summariser',
+    'free meeting summarizer',
+    'free meeting summary',
+    'free open source meeting recording',
+    'open source meeting notetaker',
+    'free meeting notetaker',
+    'offline meeting transcription',
+    'local meeting transcription',
+    'on-device meeting transcription',
+    'meeting transcription no cloud',
+    'private meeting transcription',
+    'free alternative to Otter.ai',
+    'free alternative to Fireflies',
+    'open source meeting transcription',
+    'record meetings offline',
+    'transcribe meetings locally',
     // Brand-name variants (spelling + casing) so a search for any form of the name resolves here.
     // Search engines are case-insensitive, so the casing entries are belt-and-suspenders; the
     // SPELLING variants (one word vs two) are the ones that actually matter, and they are also in
@@ -189,6 +214,10 @@ export const faqs = [
   {
     q: 'Can it transcribe meetings?',
     a: 'Yes, on Windows. The Notetaker records the call audio you hear plus your microphone and writes a timestamped transcript on your own machine. It separates who is speaking, labels you and each guest, and fills in real names as the conversation reveals them, with an optional word by word live transcript. Everything stays local, with no cloud and no account.',
+  },
+  {
+    q: 'Can it summarise a meeting for free?',
+    a: 'Yes. The Notetaker can condense a meeting into its key points and main topics entirely on your own machine, with no extra download and no cloud. The summary is extractive, built only from sentences that were actually said, so it is instant and cannot invent anything that was not spoken. Meeting features are on Windows for now.',
   },
 ]
 
