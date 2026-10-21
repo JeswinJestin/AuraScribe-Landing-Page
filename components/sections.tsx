@@ -5,6 +5,7 @@ import {
   Broom,
   ClockCounterClockwise,
   Textbox,
+  UsersThree,
 } from '@phosphor-icons/react/dist/ssr'
 import { Reveal } from './primitives'
 
@@ -151,6 +152,49 @@ export function Features() {
       </Reveal>
 
       <div className="mt-16 grid gap-5 md:grid-cols-3">
+        {/* Notetaker: the headline new capability in v2.2.0. Full-width, with a "New" tag. Kept a
+            plain card so the privacy cell stays the single accent chamber. */}
+        <Reveal className="md:col-span-3">
+          <div className="card h-full p-8 sm:p-10">
+            <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between md:gap-14">
+              <div>
+                <div className="flex items-center gap-3">
+                  <UsersThree size={30} weight="fill" className="text-accent" />
+                  <span
+                    className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent"
+                    style={{ background: 'hsl(var(--accent) / 0.12)' }}
+                  >
+                    New in v2.2.0
+                  </span>
+                </div>
+                <h3 className="display mt-6 max-w-[20ch] text-[30px] leading-[1.05] sm:text-[38px]">
+                  Now it takes meeting notes, too.
+                </h3>
+                <p className="mt-5 max-w-[60ch] text-[16px] leading-relaxed text-muted">
+                  Notetaker records a call and your microphone together and writes a timestamped
+                  transcript on your own machine. It tells apart who is speaking, labels you and each
+                  guest, and fills in real names as the conversation reveals them. Turn on word by word
+                  live transcription, get a local summary, edit any line, and resume a past meeting.
+                  Windows for now, and still no cloud.
+                </p>
+              </div>
+              {/* Abstract speaker rows (indigo only, per the one-accent rule). Not a screenshot. */}
+              <div className="flex shrink-0 flex-col gap-3" aria-hidden>
+                {[0.9, 0.55, 0.3].map((op, r) => (
+                  <div key={r} className="flex items-center gap-2.5">
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ background: `hsl(var(--accent) / ${op})` }}
+                    />
+                    <span className="h-2.5 rounded-full" style={{ width: 120 - r * 22, background: 'hsl(var(--line))' }} />
+                    <span className="h-2.5 rounded-full" style={{ width: 46 + r * 14, background: 'hsl(var(--line))' }} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         {/* Privacy: the reason the product exists. Wide accent chamber. */}
         <Reveal className="md:col-span-2">
           <div

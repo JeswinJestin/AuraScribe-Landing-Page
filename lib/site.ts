@@ -186,6 +186,10 @@ export const faqs = [
     q: 'Does it work in every application?',
     a: 'Yes. Press the hotkey in any window and the finished text is typed straight into whatever app has your cursor: browsers, editors, terminals, chat boxes, and form fields.',
   },
+  {
+    q: 'Can it transcribe meetings?',
+    a: 'Yes, on Windows. The Notetaker records the call audio you hear plus your microphone and writes a timestamped transcript on your own machine. It separates who is speaking, labels you and each guest, and fills in real names as the conversation reveals them, with an optional word by word live transcript. Everything stays local, with no cloud and no account.',
+  },
 ]
 
 export const engines = [

@@ -1,4 +1,5 @@
 import { SmoothScroll } from '@/components/smooth-scroll'
+import { Announce } from '@/components/announce'
 import { Nav } from '@/components/nav'
 import { Story } from '@/components/story'
 import { PoweredBy, HowItWorks, Features } from '@/components/sections'
@@ -15,6 +16,7 @@ import { Footer } from '@/components/footer'
 export default function Home() {
   return (
     <SmoothScroll>
+      <Announce />
       <Nav />
       <main>
         <Story />

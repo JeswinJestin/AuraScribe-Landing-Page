@@ -4,7 +4,29 @@
 > anything.** It is current as of the date below. The older "awwwards / frame-sequence storytelling"
 > plan is ABANDONED (see "Direction history"); do not resurrect it.
 
-**Last updated:** 2026-08-19 (round 3) (language wheel alignment/timing fixed; footer requirements now cross-platform; brand-name spelling/case variants added for search; 3 new cross-platform blog posts; downloads resolve via `/releases/latest`; hero fits ONE viewport with full-size type; three-platform download chips; new `docs/BACKLINKS.md`) · **Owner:** Jeswin Thomas Jestin
+**Last updated:** 2026-10-21 (**v2.2.0 Notetaker announcement** — a dismissible announcement pill
+above the nav (`components/announce.tsx`), a full-width **Notetaker** feature cell at the top of the
+Features bento with a "New in v2.2.0" badge and an abstract indigo speaker-rows visual, and a new
+"Can it transcribe meetings?" FAQ. Design rules honored: one-accent indigo only (the badge/visual use
+indigo at varying opacity, and the cell is a plain card so the privacy cell stays the single accent
+chamber), no em-dashes, phosphor icons, theme tokens. `tsc` + `npm run build` clean, console clean,
+verified live. **Prior — 2026-08-19 (round 3):** language wheel alignment/timing fixed; footer
+requirements now cross-platform; brand-name spelling/case variants added for search; 3 new
+cross-platform blog posts; downloads resolve via `/releases/latest`; hero fits ONE viewport with
+full-size type; three-platform download chips; new `docs/BACKLINKS.md`) · **Owner:** Jeswin Thomas Jestin
+
+**2026-10-21 — v2.2.0 Notetaker announcement (banner + feature cell + FAQ).**
+- **`components/announce.tsx`** (new, client): a dismissible glass pill above the nav, same width as
+  the nav pill, announcing "Notetaker is here." with a "New" badge (Sparkle), a "What's new" link to
+  `#features`, and an X that remembers dismissal in `localStorage` (`aura-announce-v2.2.0`). Rendered
+  first inside `SmoothScroll` in `app/page.tsx` so it scrolls away and the nav then sticks.
+- **Features bento (`components/sections.tsx`):** a new full-width cell leads the grid — UsersThree
+  icon, "New in v2.2.0" badge, "Now it takes meeting notes, too." + honest copy (records call + mic,
+  speaker labels, auto-detected names, optional word-by-word live transcript, Windows, no cloud), and
+  an abstract 3-row speaker visual (indigo dots at varying opacity + muted bars; NOT a fake
+  screenshot). Kept a plain card so the privacy cell remains the single accent chamber.
+- **`lib/site.ts`:** added a "Can it transcribe meetings?" FAQ (also feeds FAQPage structured data).
+- Not yet committed/pushed at time of writing — owner to confirm the Vercel deploy.
 
 **2026-08-19 (round 3) — language wheel alignment/timing, footer requirements, brand keywords, 3 blog posts, mobile/responsive hero, detectOS, README.**
 - **Mobile default download = Windows (`components/download.tsx` `detectOS`).** AuraScribe is a
