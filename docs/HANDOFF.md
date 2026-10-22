@@ -20,6 +20,14 @@ requirements now cross-platform; brand-name spelling/case variants added for sea
 cross-platform blog posts; downloads resolve via `/releases/latest`; hero fits ONE viewport with
 full-size type; three-platform download chips; new `docs/BACKLINKS.md`) · **Owner:** Jeswin Thomas Jestin
 
+**2026-10-22 — SoftwareApplication JSON-LD refreshed (entity-level SEO).**
+- `app/layout.tsx`: `softwareVersion` 2.0.0 -> **2.2.0** (was stale); `applicationSubCategory` now
+  "Voice dictation and meeting transcription"; `featureList` gained the **Notetaker** (local meeting
+  recording + transcription, speaker labels/names, Windows) and the **free on-device meeting summary**,
+  and names voice typing explicitly. This ties the site entity to the meeting-transcription searches
+  at the structured-data level, not just in prose. Honest: Notetaker marked Windows, summary extractive.
+- Build clean (28 pages); verified the rendered homepage JSON-LD carries 2.2.0 + the Notetaker feature.
+
 **2026-10-21 — SEO blog cluster for Notetaker + voice typing (4 posts + keywords + FAQ).**
 - **4 new posts** (bodies as crawlable JSX in `app/blog/<slug>/page.tsx`, metadata in `lib/blog.ts`,
   newest-first so they lead the index): `free-open-source-meeting-notetaker` (vs cloud bots like
